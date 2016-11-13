@@ -81,7 +81,7 @@ PS_psp_405Class *PS_psp_405Class::_instance = NULL;
  * @param s	The class name
  */
 //--------------------------------------------------------
-PS_psp_405Class::PS_psp_405Class(string &s):Tango::DeviceClass(s)
+PS_psp_405Class::PS_psp_405Class(string &s):PowerSuppliesAbst_ns::PowerSuppliesAbstClass(s)
 {
 	cout2 << "Entering PS_psp_405Class constructor" << endl;
 	set_default_property();
@@ -498,101 +498,124 @@ void PS_psp_405Class::attribute_factory(vector<Tango::Attr *> &att_list)
 	//	Add your own code
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405Class::attribute_factory_before
-	//	Attribute : volt_meas
-	volt_measAttrib	*volt_meas = new volt_measAttrib();
-	Tango::UserDefaultAttrProp	volt_meas_prop;
-	//	description	not set for volt_meas
-	//	label	not set for volt_meas
-	//	unit	not set for volt_meas
-	//	standard_unit	not set for volt_meas
-	//	display_unit	not set for volt_meas
-	//	format	not set for volt_meas
-	//	max_value	not set for volt_meas
-	//	min_value	not set for volt_meas
-	//	max_alarm	not set for volt_meas
-	//	min_alarm	not set for volt_meas
-	//	max_warning	not set for volt_meas
-	//	min_warning	not set for volt_meas
-	//	delta_t	not set for volt_meas
-	//	delta_val	not set for volt_meas
-	
-	volt_meas->set_default_properties(volt_meas_prop);
-	//	Not Polled
-	volt_meas->set_disp_level(Tango::OPERATOR);
-	//	Not Memorized
-	att_list.push_back(volt_meas);
+	//	Call atribute_factory for inherited class
+	PowerSuppliesAbst_ns::PowerSuppliesAbstClass::attribute_factory(att_list);
 
-	//	Attribute : curr_meas
-	curr_measAttrib	*curr_meas = new curr_measAttrib();
-	Tango::UserDefaultAttrProp	curr_meas_prop;
-	//	description	not set for curr_meas
-	//	label	not set for curr_meas
-	//	unit	not set for curr_meas
-	//	standard_unit	not set for curr_meas
-	//	display_unit	not set for curr_meas
-	//	format	not set for curr_meas
-	//	max_value	not set for curr_meas
-	//	min_value	not set for curr_meas
-	//	max_alarm	not set for curr_meas
-	//	min_alarm	not set for curr_meas
-	//	max_warning	not set for curr_meas
-	//	min_warning	not set for curr_meas
-	//	delta_t	not set for curr_meas
-	//	delta_val	not set for curr_meas
-	
-	curr_meas->set_default_properties(curr_meas_prop);
-	//	Not Polled
-	curr_meas->set_disp_level(Tango::OPERATOR);
-	//	Not Memorized
-	att_list.push_back(curr_meas);
+	//	Attribute : volt_meas - Check if not concrete in inherited class
+	Tango::Attr *volt_measAttr = get_attr_object_by_name(att_list, "volt_meas");
+	if (volt_measAttr == NULL)
+	{
+		//	Attribute : volt_meas
+		volt_measAttrib	*volt_meas = new volt_measAttrib();
+		Tango::UserDefaultAttrProp	volt_meas_prop;
+		//	description	not set for volt_meas
+		//	label	not set for volt_meas
+		//	unit	not set for volt_meas
+		//	standard_unit	not set for volt_meas
+		//	display_unit	not set for volt_meas
+		//	format	not set for volt_meas
+		//	max_value	not set for volt_meas
+		//	min_value	not set for volt_meas
+		//	max_alarm	not set for volt_meas
+		//	min_alarm	not set for volt_meas
+		//	max_warning	not set for volt_meas
+		//	min_warning	not set for volt_meas
+		//	delta_t	not set for volt_meas
+		//	delta_val	not set for volt_meas
+		
+		volt_meas->set_default_properties(volt_meas_prop);
+		//	Not Polled
+		volt_meas->set_disp_level(Tango::OPERATOR);
+		//	Not Memorized
+		att_list.push_back(volt_meas);
+	}
 
-	//	Attribute : volt_level
-	volt_levelAttrib	*volt_level = new volt_levelAttrib();
-	Tango::UserDefaultAttrProp	volt_level_prop;
-	//	description	not set for volt_level
-	//	label	not set for volt_level
-	//	unit	not set for volt_level
-	//	standard_unit	not set for volt_level
-	//	display_unit	not set for volt_level
-	//	format	not set for volt_level
-	//	max_value	not set for volt_level
-	//	min_value	not set for volt_level
-	//	max_alarm	not set for volt_level
-	//	min_alarm	not set for volt_level
-	//	max_warning	not set for volt_level
-	//	min_warning	not set for volt_level
-	//	delta_t	not set for volt_level
-	//	delta_val	not set for volt_level
-	
-	volt_level->set_default_properties(volt_level_prop);
-	//	Not Polled
-	volt_level->set_disp_level(Tango::OPERATOR);
-	//	Not Memorized
-	att_list.push_back(volt_level);
+	//	Attribute : curr_meas - Check if not concrete in inherited class
+	Tango::Attr *curr_measAttr = get_attr_object_by_name(att_list, "curr_meas");
+	if (curr_measAttr == NULL)
+	{
+		//	Attribute : curr_meas
+		curr_measAttrib	*curr_meas = new curr_measAttrib();
+		Tango::UserDefaultAttrProp	curr_meas_prop;
+		//	description	not set for curr_meas
+		//	label	not set for curr_meas
+		//	unit	not set for curr_meas
+		//	standard_unit	not set for curr_meas
+		//	display_unit	not set for curr_meas
+		//	format	not set for curr_meas
+		//	max_value	not set for curr_meas
+		//	min_value	not set for curr_meas
+		//	max_alarm	not set for curr_meas
+		//	min_alarm	not set for curr_meas
+		//	max_warning	not set for curr_meas
+		//	min_warning	not set for curr_meas
+		//	delta_t	not set for curr_meas
+		//	delta_val	not set for curr_meas
+		
+		curr_meas->set_default_properties(curr_meas_prop);
+		//	Not Polled
+		curr_meas->set_disp_level(Tango::OPERATOR);
+		//	Not Memorized
+		att_list.push_back(curr_meas);
+	}
 
-	//	Attribute : curr_level
-	curr_levelAttrib	*curr_level = new curr_levelAttrib();
-	Tango::UserDefaultAttrProp	curr_level_prop;
-	//	description	not set for curr_level
-	//	label	not set for curr_level
-	//	unit	not set for curr_level
-	//	standard_unit	not set for curr_level
-	//	display_unit	not set for curr_level
-	//	format	not set for curr_level
-	//	max_value	not set for curr_level
-	//	min_value	not set for curr_level
-	//	max_alarm	not set for curr_level
-	//	min_alarm	not set for curr_level
-	//	max_warning	not set for curr_level
-	//	min_warning	not set for curr_level
-	//	delta_t	not set for curr_level
-	//	delta_val	not set for curr_level
-	
-	curr_level->set_default_properties(curr_level_prop);
-	//	Not Polled
-	curr_level->set_disp_level(Tango::OPERATOR);
-	//	Not Memorized
-	att_list.push_back(curr_level);
+	//	Attribute : volt_level - Check if not concrete in inherited class
+	Tango::Attr *volt_levelAttr = get_attr_object_by_name(att_list, "volt_level");
+	if (volt_levelAttr == NULL)
+	{
+		//	Attribute : volt_level
+		volt_levelAttrib	*volt_level = new volt_levelAttrib();
+		Tango::UserDefaultAttrProp	volt_level_prop;
+		//	description	not set for volt_level
+		//	label	not set for volt_level
+		//	unit	not set for volt_level
+		//	standard_unit	not set for volt_level
+		//	display_unit	not set for volt_level
+		//	format	not set for volt_level
+		//	max_value	not set for volt_level
+		//	min_value	not set for volt_level
+		//	max_alarm	not set for volt_level
+		//	min_alarm	not set for volt_level
+		//	max_warning	not set for volt_level
+		//	min_warning	not set for volt_level
+		//	delta_t	not set for volt_level
+		//	delta_val	not set for volt_level
+		
+		volt_level->set_default_properties(volt_level_prop);
+		//	Not Polled
+		volt_level->set_disp_level(Tango::OPERATOR);
+		//	Not Memorized
+		att_list.push_back(volt_level);
+	}
+
+	//	Attribute : curr_level - Check if not concrete in inherited class
+	Tango::Attr *curr_levelAttr = get_attr_object_by_name(att_list, "curr_level");
+	if (curr_levelAttr == NULL)
+	{
+		//	Attribute : curr_level
+		curr_levelAttrib	*curr_level = new curr_levelAttrib();
+		Tango::UserDefaultAttrProp	curr_level_prop;
+		//	description	not set for curr_level
+		//	label	not set for curr_level
+		//	unit	not set for curr_level
+		//	standard_unit	not set for curr_level
+		//	display_unit	not set for curr_level
+		//	format	not set for curr_level
+		//	max_value	not set for curr_level
+		//	min_value	not set for curr_level
+		//	max_alarm	not set for curr_level
+		//	min_alarm	not set for curr_level
+		//	max_warning	not set for curr_level
+		//	min_warning	not set for curr_level
+		//	delta_t	not set for curr_level
+		//	delta_val	not set for curr_level
+		
+		curr_level->set_default_properties(curr_level_prop);
+		//	Not Polled
+		curr_level->set_disp_level(Tango::OPERATOR);
+		//	Not Memorized
+		att_list.push_back(curr_level);
+	}
 
 
 	//	Create a list of static attributes
@@ -637,34 +660,61 @@ void PS_psp_405Class::command_factory()
 	//	Add your own code
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405Class::command_factory_before
+	//	Call command_factory for inherited class
+	PowerSuppliesAbst_ns::PowerSuppliesAbstClass::command_factory();
 
 
-	//	Command On
-	OnClass	*pOnCmd =
-		new OnClass("On",
-			Tango::DEV_VOID, Tango::DEV_VOID,
-			"",
-			"",
-			Tango::OPERATOR);
-	command_list.push_back(pOnCmd);
 
-	//	Command Off
-	OffClass	*pOffCmd =
-		new OffClass("Off",
-			Tango::DEV_VOID, Tango::DEV_VOID,
-			"",
-			"",
-			Tango::OPERATOR);
-	command_list.push_back(pOffCmd);
+	//	Get inherited Command object On if already created
+	try
+	{
+		get_cmd_by_name("On");
+	}
+	catch (Tango::DevFailed &e)
+	{
+		//	Create On command object
+		OnClass	*pOnCmd =
+			new OnClass("On",
+				Tango::DEV_VOID, Tango::DEV_VOID,
+				"",
+				"",
+				Tango::OPERATOR);
+		command_list.push_back(pOnCmd);
+	}
 
-	//	Command UdpateAllTheStatusValues
-	UdpateAllTheStatusValuesClass	*pUdpateAllTheStatusValuesCmd =
-		new UdpateAllTheStatusValuesClass("UdpateAllTheStatusValues",
-			Tango::DEV_VOID, Tango::DEV_VOID,
-			"",
-			"",
-			Tango::OPERATOR);
-	command_list.push_back(pUdpateAllTheStatusValuesCmd);
+	//	Get inherited Command object Off if already created
+	try
+	{
+		get_cmd_by_name("Off");
+	}
+	catch (Tango::DevFailed &e)
+	{
+		//	Create Off command object
+		OffClass	*pOffCmd =
+			new OffClass("Off",
+				Tango::DEV_VOID, Tango::DEV_VOID,
+				"",
+				"",
+				Tango::OPERATOR);
+		command_list.push_back(pOffCmd);
+	}
+
+	//	Get inherited Command object UdpateAllTheStatusValues if already created
+	try
+	{
+		get_cmd_by_name("UdpateAllTheStatusValues");
+	}
+	catch (Tango::DevFailed &e)
+	{
+		//	Create UdpateAllTheStatusValues command object
+		UdpateAllTheStatusValuesClass	*pUdpateAllTheStatusValuesCmd =
+			new UdpateAllTheStatusValuesClass("UdpateAllTheStatusValues",
+				Tango::DEV_VOID, Tango::DEV_VOID,
+				"",
+				"",
+				Tango::OPERATOR);
+		command_list.push_back(pUdpateAllTheStatusValuesCmd);
+	}
 
 	/*----- PROTECTED REGION ID(PS_psp_405Class::command_factory_after) ENABLED START -----*/
 	

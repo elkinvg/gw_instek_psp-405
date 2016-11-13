@@ -43,6 +43,7 @@
 #define PS_psp_405Class_H
 
 #include <tango.h>
+#include <PowerSuppliesAbstClass.h>
 #include <PS_psp_405.h>
 
 
@@ -190,9 +191,9 @@ public:
  */
 
 #ifdef _TG_WINDOWS_
-class __declspec(dllexport)  PS_psp_405Class : public Tango::DeviceClass
+class __declspec(dllexport)  PS_psp_405Class : public PowerSuppliesAbst_ns::PowerSuppliesAbstClass
 #else
-class PS_psp_405Class : public Tango::DeviceClass
+class PS_psp_405Class : public PowerSuppliesAbst_ns::PowerSuppliesAbstClass
 #endif
 {
 	/*----- PROTECTED REGION ID(PS_psp_405Class::Additionnal DServer data members) ENABLED START -----*/

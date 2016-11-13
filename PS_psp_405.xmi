@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
 <pogoDsl:PogoSystem xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pogoDsl="http://www.esrf.fr/tango/pogo/PogoDsl">
   <classes name="PS_psp_405" pogoRevision="9.1">
-    <description description="Device Server for power supply ``GW_INSTEK PSP-405``" title="GW_INSTEK PSP-405" sourcePath="/home/elkin/tempwork/tangoservs/PSP-405" language="Cpp" filestogenerate="XMI   file,VC12 Project,Protected Regions" license="GPL" copyright="" hasMandatoryProperty="false" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false">
+    <description description="Device Server for power supply ``GW_INSTEK PSP-405``" title="GW_INSTEK PSP-405" sourcePath="d:\progrdir\vs12_2013\fortango\gw_instek_psp-405\" language="Cpp" filestogenerate="XMI   file,Code files,Makefile,VC12 Project,Protected Regions" license="GPL" copyright="" hasMandatoryProperty="false" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false">
       <inheritances classname="Device_Impl" sourcePath=""/>
-      <identification contact="at jinr.ru - elkin" author="elkin" emailDomain="jinr.ru" classFamily="PowerSupply" siteSpecific="" platform="Unix Like" bus="Socket" manufacturer="" reference=""/>
+      <inheritances classname="PowerSuppliesAbst" sourcePath="./PowerSuppliesAbst"/>
+      <identification contact="at jinr.ru - elkin" author="elkin" emailDomain="jinr.ru" classFamily="PowerSupply" siteSpecific="" platform="Unix Like" bus="Socket" manufacturer="none" reference=""/>
     </description>
     <deviceProperties name="Socket" description="Socket Tango device name in format ``domain/family/member``">
       <type xsi:type="pogoDsl:StringType"/>
@@ -34,7 +35,7 @@
       <argout description="">
         <type xsi:type="pogoDsl:VoidType"/>
       </argout>
-      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <status abstract="true" inherited="true" concrete="true" concreteHere="true"/>
     </commands>
     <commands name="Off" description="" execMethod="off" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
       <argin description="">
@@ -43,7 +44,7 @@
       <argout description="">
         <type xsi:type="pogoDsl:VoidType"/>
       </argout>
-      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <status abstract="true" inherited="true" concrete="true" concreteHere="true"/>
     </commands>
     <commands name="UdpateAllTheStatusValues" description="" execMethod="udpate_all_the_status_values" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
       <argin description="">
@@ -52,14 +53,14 @@
       <argout description="">
         <type xsi:type="pogoDsl:VoidType"/>
       </argout>
-      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <status abstract="true" inherited="true" concrete="true" concreteHere="true"/>
     </commands>
     <attributes name="volt_meas" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
       <dataType xsi:type="pogoDsl:DoubleType"/>
       <changeEvent fire="false" libCheckCriteria="false"/>
       <archiveEvent fire="false" libCheckCriteria="false"/>
       <dataReadyEvent fire="false" libCheckCriteria="true"/>
-      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <status abstract="true" inherited="true" concrete="false" concreteHere="true"/>
       <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
     </attributes>
     <attributes name="curr_meas" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
@@ -67,7 +68,7 @@
       <changeEvent fire="false" libCheckCriteria="false"/>
       <archiveEvent fire="false" libCheckCriteria="false"/>
       <dataReadyEvent fire="false" libCheckCriteria="true"/>
-      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <status abstract="true" inherited="true" concrete="false" concreteHere="true"/>
       <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
     </attributes>
     <attributes name="volt_level" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
@@ -75,7 +76,7 @@
       <changeEvent fire="false" libCheckCriteria="false"/>
       <archiveEvent fire="false" libCheckCriteria="false"/>
       <dataReadyEvent fire="false" libCheckCriteria="true"/>
-      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <status abstract="true" inherited="true" concrete="false" concreteHere="true"/>
       <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
     </attributes>
     <attributes name="curr_level" attType="Scalar" rwType="READ" displayLevel="OPERATOR" polledPeriod="0" maxX="" maxY="" allocReadMember="true" isDynamic="false">
@@ -83,9 +84,9 @@
       <changeEvent fire="false" libCheckCriteria="false"/>
       <archiveEvent fire="false" libCheckCriteria="false"/>
       <dataReadyEvent fire="false" libCheckCriteria="true"/>
-      <status abstract="false" inherited="false" concrete="true" concreteHere="true"/>
+      <status abstract="true" inherited="true" concrete="false" concreteHere="true"/>
       <properties description="" label="" unit="" standardUnit="" displayUnit="" format="" maxValue="" minValue="" maxAlarm="" minAlarm="" maxWarning="" minWarning="" deltaTime="" deltaValue=""/>
     </attributes>
-    <preferences docHome="./doc_html" makefileHome="/usr/local/share/pogo/preferences"/>
+    <preferences docHome="./doc_html" makefileHome="/home/taurel/tmp/tango_install/share/pogo/preferences"/>
   </classes>
 </pogoDsl:PogoSystem>
