@@ -324,7 +324,7 @@ public:
 
 //	Additional Method prototypes
 private:
-    std::array<double, 7> parsingOfAllStatusValues(string statusValues);
+    std::pair<std::array<double, 6>,std::bitset<7>> parsingOfAllStatusValues(string statusValues);
 
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::Additional Method prototypes

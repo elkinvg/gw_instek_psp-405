@@ -400,7 +400,10 @@ void PS_psp_405::udpate_all_the_status_values()
 	
     string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
 
-    std::array<double, 7> outVals = parsingOfAllStatusValues(reply);
+    std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
+
+    std::array<double, 6> outVals = parsed.first;
+    std::bitset<7> gettedBits = parsed.second;
 
     attr_volt_meas_read[0] = outVals[0];
     attr_curr_meas_read[0] = outVals[1];
@@ -427,14 +430,17 @@ void PS_psp_405::add_dynamic_commands()
 
 /*----- PROTECTED REGION ID(PS_psp_405::namespace_ending) ENABLED START -----*/
 
-std::array<double, 7> PS_psp_405::parsingOfAllStatusValues(string statusValues) {
-    std::array<double, 7> out;
+std::pair<std::array<double, 6>, std::bitset<7>> PS_psp_405::parsingOfAllStatusValues(string statusValues) {
+    std::array<double, 6> out;
+    std::bitset<7> outBitset;
+
     for (auto& i : out)
         i = errorOut; // if error in parsing
 
     // Formate of output: Vvv.vvAa.aaaWwww.wUuuIi.iiPpppFffffff
-    if (statusValues.size() != 37)
-        return out;
+    if (statusValues.size() != 37) {
+        return make_pair(out, outBitset);
+    }
 
     auto lambdaForParsing = [](string in, size_t pos, size_t len) {
         return in.substr(pos, len);
@@ -461,9 +467,17 @@ std::array<double, 7> PS_psp_405::parsingOfAllStatusValues(string statusValues) 
     out[3] = checkOut(lambdaForParsing(statusValues, 18, 3), 'U');
     out[4] = checkOut(lambdaForParsing(statusValues, 21, 5), 'I');
     out[5] = checkOut(lambdaForParsing(statusValues, 26, 4), 'P');
-    out[6] = checkOut(lambdaForParsing(statusValues, 30, std::string::npos), 'F');
 
-    return out;
+    try {
+        auto bits = lambdaForParsing(statusValues, 31, std::string::npos);
+        bitset<7> tstBitset(bits);
+        if (statusValues[30] == 'F')
+            tstBitset.set(tstBitset.size() - 1, 1);
+        outBitset = tstBitset;
+    }
+    catch (...) {}
+
+    return make_pair(out,outBitset);
 }
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::namespace_ending
