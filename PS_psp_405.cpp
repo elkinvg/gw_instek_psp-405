@@ -430,7 +430,8 @@ void PS_psp_405::add_dynamic_commands()
 
 /*----- PROTECTED REGION ID(PS_psp_405::namespace_ending) ENABLED START -----*/
 
-std::pair<std::array<double, 6>, std::bitset<7>> PS_psp_405::parsingOfAllStatusValues(string statusValues) {
+std::pair<std::array<double, 6>, std::bitset<7> > PS_psp_405::parsingOfAllStatusValues(string statusValues)
+{
     std::array<double, 6> out;
     std::bitset<7> outBitset;
 
@@ -438,6 +439,7 @@ std::pair<std::array<double, 6>, std::bitset<7>> PS_psp_405::parsingOfAllStatusV
         i = errorOut; // if error in parsing
 
     // Formate of output: Vvv.vvAa.aaaWwww.wUuuIi.iiPpppFffffff
+    DEBUG_STREAM << " data from PS " << statusValues.size() <<" symbols : " << statusValues << endl;
     if (statusValues.size() != 37) {
         return make_pair(out, outBitset);
     }
