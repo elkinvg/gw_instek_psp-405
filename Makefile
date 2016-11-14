@@ -4,7 +4,7 @@
 #
 # description : Makefile to generate a TANGO device server.
 #
-# project :     PS_PSP_405
+# project :     PS_psp_405
 #
 # $Author:  $
 #
@@ -57,13 +57,21 @@ OUTPUT_TYPE = DEVICE
 #
 #OUTPUT_DIR =
 
+#=============================================================================
+# Following are names, pathes and files of the inherited classes used by project
+#
+#------------ Inheritance from PS_psp_405 class ------------
+POWERSUPPLIESABST_CLASS = PowerSuppliesAbst
+POWERSUPPLIESABST_HOME  = ./PowerSuppliesAbst
+
 
 #=============================================================================
 # INC_DIR_USER is the list of all include path needed by your sources
 #   - for a device server, tango dependencies are automatically appended
 #   - '-I ../include' and '-I .' are automatically appended in all cases
 #
-INC_DIR_USER= -I . 
+INC_DIR_USER= -I . \
+              -I $(POWERSUPPLIESABST_HOME)
 
 #=============================================================================
 # LIB_DIR_USER is the list of user library directories
@@ -120,7 +128,7 @@ include $(MAKE_ENV)/tango.opt
 #=============================================================================
 # SVC_OBJS is the list of all objects needed to make the output
 #
-SVC_INCL =  $(PACKAGE_NAME).h $(PACKAGE_NAME)Class.h 
+SVC_INCL =  $(PACKAGE_NAME).h $(PACKAGE_NAME)Class.h $(SVC_INHERITANCE_INCL)
 
 
 SVC_OBJS =      \
@@ -132,9 +140,17 @@ LIB_OBJS = \
         $(OBJDIR)/$(PACKAGE_NAME).o \
         $(OBJDIR)/$(PACKAGE_NAME)Class.o \
         $(OBJDIR)/$(PACKAGE_NAME)StateMachine.o \
+		$(SVC_INHERITANCE_OBJ) \
         $(ADDITIONAL_OBJS) 
 
 SVC_INHERITANCE_OBJ =  \
+        $(SVC_POWERSUPPLIESABST_OBJ) \
+
+#------------  Object files for GenericPS class  ------------
+SVC_POWERSUPPLIESABST_OBJ = \
+        $(OBJDIR)/PowerSuppliesAbst.o \
+        $(OBJDIR)/PowerSuppliesAbstClass.o \
+        $(OBJDIR)/PowerSuppliesAbstStateMachine.o \
 
 
 #=============================================================================
@@ -143,5 +159,21 @@ SVC_INHERITANCE_OBJ =  \
 include $(MAKE_ENV)/common_target.opt
 
 
+#=============================================================================
+# Following are dependancies of the inherited classes used by project
+#
+
+#------------  Object files dependancies for PowerSuppliesAbst class  ------------
+POWERSUPPLIESABST_INCLUDES = \
+		$(POWERSUPPLIESABST_HOME)/PowerSuppliesAbst.h \
+		$(POWERSUPPLIESABST_HOME)/PowerSuppliesAbstClass.h
+$(OBJDIR)/PowerSuppliesAbst.o:  $(POWERSUPPLIESABST_HOME)/PowerSuppliesAbst.cpp $(POWERSUPPLIESABST_INCLUDES)
+	$(CXX) $(CXXFLAGS) -c $< -o $(OBJDIR)/PowerSuppliesAbst.o
+$(OBJDIR)/PowerSuppliesAbstClass.o:  $(POWERSUPPLIESABST_HOME)/PowerSuppliesAbstClass.cpp $(POWERSUPPLIESABST_INCLUDES)
+	$(CXX) $(CXXFLAGS) -c $< -o $(OBJDIR)/PowerSuppliesAbstClass.o
+$(OBJDIR)/PowerSuppliesAbstStateMachine.o:  $(POWERSUPPLIESABST_HOME)/PowerSuppliesAbstStateMachine.cpp $(POWERSUPPLIESABST_INCLUDES)
+	$(CXX) $(CXXFLAGS) -c $< -o $(OBJDIR)/PowerSuppliesAbstStateMachine.o
+
+SVC_INHERITANCE_INCL =  $(POWERSUPPLIESABST_INCLUDES)
 
 

@@ -60,7 +60,7 @@ static const char *RcsId = "$Id:  $";
 //  Status                    |  Inherited (no method)
 //  On                        |  on
 //  Off                       |  off
-//  UdpateAllTheStatusValues  |  udpate_all_the_status_values
+//  UpdateAllTheStatusValues  |  update_all_the_status_values
 //================================================================
 
 //================================================================
@@ -88,7 +88,7 @@ namespace PS_psp_405_ns
  */
 //--------------------------------------------------------
 PS_psp_405::PS_psp_405(Tango::DeviceClass *cl, string &s)
- : TANGO_BASE_CLASS(cl, s.c_str())
+ : PowerSuppliesAbst(cl, s.c_str())
 {
 	/*----- PROTECTED REGION ID(PS_psp_405::constructor_1) ENABLED START -----*/
 	init_device();
@@ -97,7 +97,7 @@ PS_psp_405::PS_psp_405(Tango::DeviceClass *cl, string &s)
 }
 //--------------------------------------------------------
 PS_psp_405::PS_psp_405(Tango::DeviceClass *cl, const char *s)
- : TANGO_BASE_CLASS(cl, s)
+ : PowerSuppliesAbst(cl, s)
 {
 	/*----- PROTECTED REGION ID(PS_psp_405::constructor_2) ENABLED START -----*/
 	init_device();
@@ -106,7 +106,7 @@ PS_psp_405::PS_psp_405(Tango::DeviceClass *cl, const char *s)
 }
 //--------------------------------------------------------
 PS_psp_405::PS_psp_405(Tango::DeviceClass *cl, const char *s, const char *d)
- : TANGO_BASE_CLASS(cl, s, d)
+ : PowerSuppliesAbst(cl, s, d)
 {
 	/*----- PROTECTED REGION ID(PS_psp_405::constructor_3) ENABLED START -----*/
 	init_device();
@@ -132,6 +132,14 @@ void PS_psp_405::delete_device()
 	delete[] attr_curr_meas_read;
 	delete[] attr_volt_level_read;
 	delete[] attr_curr_level_read;
+
+	if (Tango::Util::instance()->is_svr_shutting_down()==false  &&
+		Tango::Util::instance()->is_device_restarting(device_name)==false &&
+		Tango::Util::instance()->is_svr_starting()==false)
+	{
+		//	If not shutting down call delete device for inherited object
+		PowerSuppliesAbst_ns::PowerSuppliesAbst::delete_device();
+	}
 }
 
 //--------------------------------------------------------
@@ -149,6 +157,12 @@ void PS_psp_405::init_device()
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::init_device_before
 	
+	if (Tango::Util::instance()->is_svr_starting() == false  &&
+		Tango::Util::instance()->is_device_restarting(device_name)==false)
+	{
+		//	If not starting up call init device for inherited object
+		PowerSuppliesAbst_ns::PowerSuppliesAbst::init_device();
+	}
 
 	//	Get the device properties from database
 	get_device_property();
@@ -159,21 +173,11 @@ void PS_psp_405::init_device()
 	attr_curr_level_read = new Tango::DevDouble[1];
 	/*----- PROTECTED REGION ID(PS_psp_405::init_device) ENABLED START -----*/
 	
-	//	Initialize device
+    initTangoSocket(socket);
     attr_curr_level_read[0] = -1;
     attr_volt_level_read[0] = -1;
     attr_curr_meas_read[0] = -1;
     attr_volt_meas_read[0] = -1;
-
-    try {
-        DEBUG_STREAM << "Socket:    " << socket << endl;
-        socketProxy = new Tango::DeviceProxy(socket);
-
-        // ??? setting timeout
-        //socketProxy->set_timeout_millis(1000);
-    } catch (Tango::DevFailed &e) {
-        fromException(e);
-    }
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::init_device
 }
@@ -241,7 +245,8 @@ void PS_psp_405::always_executed_hook()
 	DEBUG_STREAM << "PS_psp_405::always_executed_hook()  " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::always_executed_hook) ENABLED START -----*/
 	
-	//	code always executed before all requests
+    //	code always executed before all requests
+    checkSocketState();
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::always_executed_hook
 }
@@ -385,40 +390,27 @@ void PS_psp_405::off()
 }
 //--------------------------------------------------------
 /**
- *	Command UdpateAllTheStatusValues related method
+ *	Command UpdateAllTheStatusValues related method
  *	Description: 
  *
  */
 //--------------------------------------------------------
-void PS_psp_405::udpate_all_the_status_values()
+void PS_psp_405::update_all_the_status_values()
 {
-	DEBUG_STREAM << "PS_psp_405::UdpateAllTheStatusValues()  - " << device_name << endl;
-	/*----- PROTECTED REGION ID(PS_psp_405::udpate_all_the_status_values) ENABLED START -----*/
+	DEBUG_STREAM << "PS_psp_405::UpdateAllTheStatusValues()  - " << device_name << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::update_all_the_status_values) ENABLED START -----*/
 	
-    Tango::DeviceData input, output;
-    std::string reply;
-
-    try {
-        input << GETALLTHESTATUSVALUE;
-        //output = socketProxy->command_inout("WriteAndRead", input);
-        socketProxy->command_inout("Write", input);
-#ifdef __unix__
-        usleep(300);
-#else
-        Sleep(300); // for serialport
-#endif
-        output = socketProxy->command_inout("Read");
-        output >> reply;
-        DEBUG_STREAM << "REPLY getValuesOfCurrAndVolt: " << reply << endl;
-    }
-    catch (Tango::CommunicationFailed &e) {
-        output = socketProxy->command_inout("Init");
-    }
-    catch (Tango::DevFailed &e) {
-        fromException(e);
-    }
+    string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
+    //string reply = toSocketWriteAndReadBinary(GETALLTHESTATUSVALUE,sleepTm);
+    std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
+    std::array<double, 6> outVals = parsed.first;
+    std::bitset<7> gettedBits = parsed.second;
+    attr_volt_meas_read[0] = outVals[0];
+    attr_curr_meas_read[0] = outVals[1];
+    attr_volt_level_read[0] = outVals[3];
+    attr_curr_level_read[0] = outVals[4];
 	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::udpate_all_the_status_values
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::update_all_the_status_values
 }
 //--------------------------------------------------------
 /**
@@ -433,42 +425,72 @@ void PS_psp_405::add_dynamic_commands()
 	
 	//	Add your own code to create and add dynamic commands if any
 	
-    /*----- PROTECTED REGION END -----*/	//	PS_psp_405::add_dynamic_commands
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::add_dynamic_commands
 }
 
 /*----- PROTECTED REGION ID(PS_psp_405::namespace_ending) ENABLED START -----*/
 
-//	Additional Methods
-
-void PS_psp_405::check_socket_state()
+std::pair<std::array<double, 6>, std::bitset<7> > PS_psp_405::parsingOfAllStatusValues(string statusValues)
 {
-    Tango::DeviceData outputCom;
-    Tango::DevState stateSocket;
+    std::array<double, 6> out;
+    std::bitset<7> outBitset;
+
+    for (auto& i : out)
+        i = errorOut; // if error in parsing
+
+    // Formate of output: Vvv.vvAa.aaaWwww.wUuuIi.iiPpppFffffff
+
+
+    // Searching of '\r'
+    std::size_t pos;
+    pos = statusValues.find('\r');
+    if (pos!=std::string::npos)
+        statusValues = statusValues.substr(0,pos);
+
+    DEBUG_STREAM << " data from PS " << statusValues.size() <<" symbols : " << statusValues << endl;
+
+    if (statusValues.size() != 37) {
+        return make_pair(out, outBitset);
+    }
+
+    auto lambdaForParsing = [](string in, size_t pos, size_t len) {
+        return in.substr(pos, len);
+    };
+
+    auto checkOut = [=](string in, char ch) {
+        double outp;
+        if (in[0] != ch)
+            outp = errorOut;
+        else {
+            try {
+                outp = stod(in.substr(1));
+            }
+            catch (const std::invalid_argument& ia) {
+                outp = errorOut;
+            }
+        }
+        return outp;
+    };
+
+    out[0] = checkOut(lambdaForParsing(statusValues, 0, 6), 'V');
+    out[1] = checkOut(lambdaForParsing(statusValues, 6, 6), 'A');
+    out[2] = checkOut(lambdaForParsing(statusValues, 12, 6), 'W');
+    out[3] = checkOut(lambdaForParsing(statusValues, 18, 3), 'U');
+    out[4] = checkOut(lambdaForParsing(statusValues, 21, 5), 'I');
+    out[5] = checkOut(lambdaForParsing(statusValues, 26, 4), 'P');
 
     try {
-        outputCom = socketProxy->command_inout("State");
-        outputCom >> stateSocket;
-        if (stateSocket == Tango::ON) {
-            isSocketOn = true;
-        }
-        else if (stateSocket == Tango::OFF || stateSocket == Tango::FAULT)
-        {
-            isSocketOn = false;
-        }
-    } catch (Tango::DevFailed &e) {
-        fromException(e);
-        isSocketOn = false;
+        auto bits = lambdaForParsing(statusValues, 31, std::string::npos);
+        bitset<7> tstBitset(bits);
+        if (statusValues[30] == 'F')
+            tstBitset.set(tstBitset.size() - 1, 1);
+        outBitset = tstBitset;
     }
+    catch (...) {}
+
+    return make_pair(out,outBitset);
 }
 
-void PS_psp_405::fromException(Tango::DevFailed &e)
-{
-    auto lnh = e.errors.length();
-    for (int i=0;i<lnh;i++) {
-        ERROR_STREAM << e.errors[i].desc << endl;
-    }
-    //    Tango::Except::print_exception(e);
-}
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::namespace_ending
 } //	namespace

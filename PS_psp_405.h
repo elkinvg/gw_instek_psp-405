@@ -39,6 +39,9 @@
 #define PS_psp_405_H
 
 #include <tango.h>
+#include <PowerSuppliesAbst.h>
+
+#include <array>
 
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405.h
@@ -56,17 +59,110 @@ namespace PS_psp_405_ns
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::Additional Class Declarations
 
-class PS_psp_405 : public TANGO_BASE_CLASS
+class PS_psp_405 : public PowerSuppliesAbst_ns::PowerSuppliesAbst
 {
 
 /*----- PROTECTED REGION ID(PS_psp_405::Data Members) ENABLED START -----*/
 
 //	Add your own data members
 private:
-    //const string GETALLTHESTATUSVALUE = {'L',13};
-    string GETALLTHESTATUSVALUE = "L";
-    Tango::DeviceProxy *socketProxy;
-    bool isSocketOn;
+//    const string GETALLTHESTATUSVALUE = {'L', 13};
+//    const string GETPRESENTOUTVOLT = {'V', 13};
+//    const string GETPRESENTOUTCURR = {'A', 13};
+
+//    const string GETMAXVOLTLIMIT = { 'U', 13 };
+//    const string GETMAXCURRLIMIT = { 'I', 13 };
+//    const string GETPRESENTSTATUS = { 'F', 13 };
+
+//    const string SETMAXCURRLIMIT = { 'S', 'I', 'M', 13 };
+//    const string SETMAXVOLTLIMIT = { 'S', 'U', 'M', 13 };
+
+//    const string SETRELAYSTATUSTOON = { 'K', 'O', 'E', 13 };
+//    const string SETRELAYSTATUSTOOFF = { 'K', 'O', 'D', 13 };
+
+//    const string SETOUTVOLTVALUE = { 'S', 'V', ' ' };
+//    const string SETVOLTLIMIT = { 'S', 'U', ' ' };
+//    const string SETCURRLIMIT = { 'S', 'I', ' ' };
+
+    //----------------------------------------------//
+
+    /**
+    * To obtain all the status values of the power supply
+    */
+    string GETALLTHESTATUSVALUE = "L\r\n";
+
+    //----------------------------------------------//
+    /**
+    * The present output voltage, the unit is V.
+    */
+    string GETPRESENTOUTVOLT = "V\r\n";
+
+    /**
+    * The present output current, the unit is A.
+    */
+    string GETPRESENTOUTCURR = "A\r\n";
+
+    //----------------------------------------------//
+
+    /**
+    * The maximum voltage limit at present, the unit is V.
+    */
+    string GETMAXVOLTLIMIT = "U\r\n";
+
+    /**
+    * The maximum current limit at present, the unit is A
+    */
+    string GETMAXCURRLIMIT = "I\r\n";
+
+    /**
+    * The present status of the power supply
+    */
+    string GETPRESENTSTATUS = "F\r\n";
+
+    //----------------------------------------------//
+
+    /**
+    * When the message of SIM<cr> (SUM<cr>) is sent to the power supply from
+    * computer, the power supply will set the (current) voltage limit to the maximum
+    * immediately
+    */
+
+    string SETMAXCURRLIMIT = "SIM\r\n";
+    string SETMAXVOLTLIMIT = "SUM\r\n";
+
+    //----------------------------------------------//
+
+    /**
+    * Set the Relay status to ON.
+    */
+    string SETRELAYSTATUSTOON = "KOE\r\n";
+    
+    /**
+    * Set the Relay status to OFF.
+    */
+    string SETRELAYSTATUSTOOFF = "KOD\r\n";
+
+    //----------------------------------------------//
+
+
+    /**
+    * Set the output voltage value.
+    */
+    string SETOUTVOLTVALUE = "SV ";
+
+    /**
+    * Set voltage limit.
+    */
+    string SETVOLTLIMIT = "SU ";
+
+    /**
+    * Set current limit.
+    */
+    string SETCURRLIMIT = "SI ";
+
+
+    const double errorOut = -1.0;
+    const unsigned int sleepTm = 300;
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::Data Members
 
@@ -208,12 +304,12 @@ public:
 	virtual void off();
 	virtual bool is_Off_allowed(const CORBA::Any &any);
 	/**
-	 *	Command UdpateAllTheStatusValues related method
+	 *	Command UpdateAllTheStatusValues related method
 	 *	Description: 
 	 *
 	 */
-	virtual void udpate_all_the_status_values();
-	virtual bool is_UdpateAllTheStatusValues_allowed(const CORBA::Any &any);
+	virtual void update_all_the_status_values();
+	virtual bool is_UpdateAllTheStatusValues_allowed(const CORBA::Any &any);
 
 
 	//--------------------------------------------------------
@@ -228,9 +324,8 @@ public:
 
 //	Additional Method prototypes
 private:
-    void check_psstate();
-    void check_socket_state();
-    void fromException(Tango::DevFailed &e);
+    std::pair<std::array<double, 6>,std::bitset<7>> parsingOfAllStatusValues(string statusValues);
+
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::Additional Method prototypes
 };

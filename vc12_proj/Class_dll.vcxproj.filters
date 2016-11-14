@@ -1,13 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-	<ClCompile Include="..\PS_psp_405.cpp" />
-	<ClCompile Include="..\PS_psp_405Class.cpp" />
-	<ClCompile Include="..\PS_psp_405StateMachine.cpp" />
+    <ClCompile Include="..\PS_psp_405.cpp" />
+    <ClCompile Include="..\PS_psp_405Class.cpp" />
+    <ClCompile Include="..\PS_psp_405StateMachine.cpp" />
+    <ClCompile Include="..\PowerSuppliesAbst\PowerSuppliesAbst.cpp" />
+    <ClCompile Include="..\PowerSuppliesAbst\PowerSuppliesAbstClass.cpp" />
+    <ClCompile Include="..\PowerSuppliesAbst\PowerSuppliesAbstStateMachine.cpp" />
   </ItemGroup>
   <ItemGroup>
-	<ClInclude Include="..\PS_psp_405.h"> </ClInclude>
-	<ClInclude Include="..\PS_psp_405Class.h"> </ClInclude>
+    <ClInclude Include="..\PS_psp_405.h">
+    </ClInclude>
+    <ClInclude Include="..\PS_psp_405Class.h">
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
