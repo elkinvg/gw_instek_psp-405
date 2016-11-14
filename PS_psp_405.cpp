@@ -368,7 +368,7 @@ void PS_psp_405::on()
 	DEBUG_STREAM << "PS_psp_405::On()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::on) ENABLED START -----*/
 	
-	//	Add your own code
+    toSocketWrite(SETRELAYSTATUSTOON);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::on
 }
@@ -384,7 +384,7 @@ void PS_psp_405::off()
 	DEBUG_STREAM << "PS_psp_405::Off()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::off) ENABLED START -----*/
 	
-	//	Add your own code
+    toSocketWrite(SETRELAYSTATUSTOOFF);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::off
 }
