@@ -400,8 +400,8 @@ void PS_psp_405::update_all_the_status_values()
 	DEBUG_STREAM << "PS_psp_405::UpdateAllTheStatusValues()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::update_all_the_status_values) ENABLED START -----*/
 	
-    //string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
-    string reply = toSocketWriteAndReadBinary(GETALLTHESTATUSVALUE,sleepTm);
+    string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
+    //string reply = toSocketWriteAndReadBinary(GETALLTHESTATUSVALUE,sleepTm);
     std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
     std::array<double, 6> outVals = parsed.first;
     std::bitset<7> gettedBits = parsed.second;
@@ -439,7 +439,16 @@ std::pair<std::array<double, 6>, std::bitset<7> > PS_psp_405::parsingOfAllStatus
         i = errorOut; // if error in parsing
 
     // Formate of output: Vvv.vvAa.aaaWwww.wUuuIi.iiPpppFffffff
+
+
+    // Searching of '\r'
+    std::size_t pos;
+    pos = statusValues.find('\r');
+    if (pos!=std::string::npos)
+        statusValues = statusValues.substr(0,pos);
+
     DEBUG_STREAM << " data from PS " << statusValues.size() <<" symbols : " << statusValues << endl;
+
     if (statusValues.size() != 37) {
         return make_pair(out, outBitset);
     }
