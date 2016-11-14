@@ -89,35 +89,35 @@ private:
     /**
     * To obtain all the status values of the power supply
     */
-    string GETALLTHESTATUSVALUE = "L";
+    string GETALLTHESTATUSVALUE = "L\r\n";
 
     //----------------------------------------------//
     /**
     * The present output voltage, the unit is V.
     */
-    string GETPRESENTOUTVOLT = "V";
+    string GETPRESENTOUTVOLT = "V\r\n";
 
     /**
     * The present output current, the unit is A.
     */
-    string GETPRESENTOUTCURR = "A";
+    string GETPRESENTOUTCURR = "A\r\n";
 
     //----------------------------------------------//
 
     /**
     * The maximum voltage limit at present, the unit is V.
     */
-    string GETMAXVOLTLIMIT = "U";
+    string GETMAXVOLTLIMIT = "U\r\n";
 
     /**
     * The maximum current limit at present, the unit is A
     */
-    string GETMAXCURRLIMIT = "I";
+    string GETMAXCURRLIMIT = "I\r\n";
 
     /**
     * The present status of the power supply
     */
-    string GETPRESENTSTATUS = "F";
+    string GETPRESENTSTATUS = "F\r\n";
 
     //----------------------------------------------//
 
@@ -127,20 +127,20 @@ private:
     * immediately
     */
 
-    string SETMAXCURRLIMIT = "SIM";
-    string SETMAXVOLTLIMIT = "SUM";
+    string SETMAXCURRLIMIT = "SIM\r\n";
+    string SETMAXVOLTLIMIT = "SUM\r\n";
 
     //----------------------------------------------//
 
     /**
     * Set the Relay status to ON.
     */
-    string SETRELAYSTATUSTOON = "KOE";
+    string SETRELAYSTATUSTOON = "KOE\r\n";
     
     /**
     * Set the Relay status to OFF.
     */
-    string SETRELAYSTATUSTOOFF = "KOD";
+    string SETRELAYSTATUSTOOFF = "KOD\r\n";
 
     //----------------------------------------------//
 

@@ -439,7 +439,16 @@ std::pair<std::array<double, 6>, std::bitset<7> > PS_psp_405::parsingOfAllStatus
         i = errorOut; // if error in parsing
 
     // Formate of output: Vvv.vvAa.aaaWwww.wUuuIi.iiPpppFffffff
+
+
+    // Searching of '\r'
+    std::size_t pos;
+    pos = statusValues.find('\r');
+    if (pos!=std::string::npos)
+        statusValues = statusValues.substr(0,pos);
+
     DEBUG_STREAM << " data from PS " << statusValues.size() <<" symbols : " << statusValues << endl;
+
     if (statusValues.size() != 37) {
         return make_pair(out, outBitset);
     }
