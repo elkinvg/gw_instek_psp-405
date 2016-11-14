@@ -173,6 +173,7 @@ void PS_psp_405::init_device()
 	attr_curr_level_read = new Tango::DevDouble[1];
 	/*----- PROTECTED REGION ID(PS_psp_405::init_device) ENABLED START -----*/
 	
+    initTangoSocket(socket);
     attr_curr_level_read[0] = -1;
     attr_volt_level_read[0] = -1;
     attr_curr_meas_read[0] = -1;
@@ -244,7 +245,8 @@ void PS_psp_405::always_executed_hook()
 	DEBUG_STREAM << "PS_psp_405::always_executed_hook()  " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::always_executed_hook) ENABLED START -----*/
 	
-	//	code always executed before all requests
+    //	code always executed before all requests
+    checkSocketState();
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::always_executed_hook
 }
@@ -397,9 +399,8 @@ void PS_psp_405::udpate_all_the_status_values()
 {
 	DEBUG_STREAM << "PS_psp_405::UdpateAllTheStatusValues()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::udpate_all_the_status_values) ENABLED START -----*/
-	
-    string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
 
+    string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
     std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
 
     std::array<double, 6> outVals = parsed.first;
