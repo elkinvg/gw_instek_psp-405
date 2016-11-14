@@ -304,12 +304,12 @@ public:
 	virtual void off();
 	virtual bool is_Off_allowed(const CORBA::Any &any);
 	/**
-	 *	Command UdpateAllTheStatusValues related method
+	 *	Command UpdateAllTheStatusValues related method
 	 *	Description: 
 	 *
 	 */
-	virtual void udpate_all_the_status_values();
-	virtual bool is_UdpateAllTheStatusValues_allowed(const CORBA::Any &any);
+	virtual void update_all_the_status_values();
+	virtual bool is_UpdateAllTheStatusValues_allowed(const CORBA::Any &any);
 
 
 	//--------------------------------------------------------

@@ -196,7 +196,7 @@ CORBA::Any *OffClass::execute(Tango::DeviceImpl *device, TANGO_UNUSED(const CORB
 
 //--------------------------------------------------------
 /**
- * method : 		UdpateAllTheStatusValuesClass::execute()
+ * method : 		UpdateAllTheStatusValuesClass::execute()
  * description : 	method to trigger the execution of the command.
  *
  * @param	device	The device on which the command must be executed
@@ -205,10 +205,10 @@ CORBA::Any *OffClass::execute(Tango::DeviceImpl *device, TANGO_UNUSED(const CORB
  *	returns The command output data (packed in the Any object)
  */
 //--------------------------------------------------------
-CORBA::Any *UdpateAllTheStatusValuesClass::execute(Tango::DeviceImpl *device, TANGO_UNUSED(const CORBA::Any &in_any))
+CORBA::Any *UpdateAllTheStatusValuesClass::execute(Tango::DeviceImpl *device, TANGO_UNUSED(const CORBA::Any &in_any))
 {
-	cout2 << "UdpateAllTheStatusValuesClass::execute(): arrived" << endl;
-	((static_cast<PS_psp_405 *>(device))->udpate_all_the_status_values());
+	cout2 << "UpdateAllTheStatusValuesClass::execute(): arrived" << endl;
+	((static_cast<PS_psp_405 *>(device))->update_all_the_status_values());
 	return new CORBA::Any();
 }
 
@@ -699,21 +699,21 @@ void PS_psp_405Class::command_factory()
 		command_list.push_back(pOffCmd);
 	}
 
-	//	Get inherited Command object UdpateAllTheStatusValues if already created
+	//	Get inherited Command object UpdateAllTheStatusValues if already created
 	try
 	{
-		get_cmd_by_name("UdpateAllTheStatusValues");
+		get_cmd_by_name("UpdateAllTheStatusValues");
 	}
 	catch (Tango::DevFailed &e)
 	{
-		//	Create UdpateAllTheStatusValues command object
-		UdpateAllTheStatusValuesClass	*pUdpateAllTheStatusValuesCmd =
-			new UdpateAllTheStatusValuesClass("UdpateAllTheStatusValues",
+		//	Create UpdateAllTheStatusValues command object
+		UpdateAllTheStatusValuesClass	*pUpdateAllTheStatusValuesCmd =
+			new UpdateAllTheStatusValuesClass("UpdateAllTheStatusValues",
 				Tango::DEV_VOID, Tango::DEV_VOID,
 				"",
 				"",
 				Tango::OPERATOR);
-		command_list.push_back(pUdpateAllTheStatusValuesCmd);
+		command_list.push_back(pUpdateAllTheStatusValuesCmd);
 	}
 
 	/*----- PROTECTED REGION ID(PS_psp_405Class::command_factory_after) ENABLED START -----*/

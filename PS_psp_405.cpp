@@ -60,7 +60,7 @@ static const char *RcsId = "$Id:  $";
 //  Status                    |  Inherited (no method)
 //  On                        |  on
 //  Off                       |  off
-//  UdpateAllTheStatusValues  |  udpate_all_the_status_values
+//  UpdateAllTheStatusValues  |  update_all_the_status_values
 //================================================================
 
 //================================================================
@@ -390,29 +390,27 @@ void PS_psp_405::off()
 }
 //--------------------------------------------------------
 /**
- *	Command UdpateAllTheStatusValues related method
+ *	Command UpdateAllTheStatusValues related method
  *	Description: 
  *
  */
 //--------------------------------------------------------
-void PS_psp_405::udpate_all_the_status_values()
+void PS_psp_405::update_all_the_status_values()
 {
-	DEBUG_STREAM << "PS_psp_405::UdpateAllTheStatusValues()  - " << device_name << endl;
-	/*----- PROTECTED REGION ID(PS_psp_405::udpate_all_the_status_values) ENABLED START -----*/
-
+	DEBUG_STREAM << "PS_psp_405::UpdateAllTheStatusValues()  - " << device_name << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::update_all_the_status_values) ENABLED START -----*/
+	
     //string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
     string reply = toSocketWriteAndReadBinary(GETALLTHESTATUSVALUE,sleepTm);
     std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
-
     std::array<double, 6> outVals = parsed.first;
     std::bitset<7> gettedBits = parsed.second;
-
     attr_volt_meas_read[0] = outVals[0];
     attr_curr_meas_read[0] = outVals[1];
     attr_volt_level_read[0] = outVals[3];
     attr_curr_level_read[0] = outVals[4];
 	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::udpate_all_the_status_values
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::update_all_the_status_values
 }
 //--------------------------------------------------------
 /**
@@ -481,6 +479,7 @@ std::pair<std::array<double, 6>, std::bitset<7>> PS_psp_405::parsingOfAllStatusV
 
     return make_pair(out,outBitset);
 }
+
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::namespace_ending
 } //	namespace

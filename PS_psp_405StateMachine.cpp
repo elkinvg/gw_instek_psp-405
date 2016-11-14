@@ -151,16 +151,16 @@ bool PS_psp_405::is_Off_allowed(TANGO_UNUSED(const CORBA::Any &any))
 
 //--------------------------------------------------------
 /**
- *	Method      : PS_psp_405::is_UdpateAllTheStatusValues_allowed()
- *	Description : Execution allowed for UdpateAllTheStatusValues attribute
+ *	Method      : PS_psp_405::is_UpdateAllTheStatusValues_allowed()
+ *	Description : Execution allowed for UpdateAllTheStatusValues attribute
  */
 //--------------------------------------------------------
-bool PS_psp_405::is_UdpateAllTheStatusValues_allowed(TANGO_UNUSED(const CORBA::Any &any))
+bool PS_psp_405::is_UpdateAllTheStatusValues_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
-	//	Not any excluded states for UdpateAllTheStatusValues command.
-	/*----- PROTECTED REGION ID(PS_psp_405::UdpateAllTheStatusValuesStateAllowed) ENABLED START -----*/
+	//	Not any excluded states for UpdateAllTheStatusValues command.
+	/*----- PROTECTED REGION ID(PS_psp_405::UpdateAllTheStatusValuesStateAllowed) ENABLED START -----*/
 	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::UdpateAllTheStatusValuesStateAllowed
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::UpdateAllTheStatusValuesStateAllowed
 	return true;
 }
 

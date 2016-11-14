@@ -162,11 +162,11 @@ public:
 	{return (static_cast<PS_psp_405 *>(dev))->is_Off_allowed(any);}
 };
 
-//	Command UdpateAllTheStatusValues class definition
-class UdpateAllTheStatusValuesClass : public Tango::Command
+//	Command UpdateAllTheStatusValues class definition
+class UpdateAllTheStatusValuesClass : public Tango::Command
 {
 public:
-	UdpateAllTheStatusValuesClass(const char   *name,
+	UpdateAllTheStatusValuesClass(const char   *name,
 	               Tango::CmdArgType in,
 				   Tango::CmdArgType out,
 				   const char        *in_desc,
@@ -174,15 +174,15 @@ public:
 				   Tango::DispLevel  level)
 	:Command(name,in,out,in_desc,out_desc, level)	{};
 
-	UdpateAllTheStatusValuesClass(const char   *name,
+	UpdateAllTheStatusValuesClass(const char   *name,
 	               Tango::CmdArgType in,
 				   Tango::CmdArgType out)
 	:Command(name,in,out)	{};
-	~UdpateAllTheStatusValuesClass() {};
+	~UpdateAllTheStatusValuesClass() {};
 	
 	virtual CORBA::Any *execute (Tango::DeviceImpl *dev, const CORBA::Any &any);
 	virtual bool is_allowed (Tango::DeviceImpl *dev, const CORBA::Any &any)
-	{return (static_cast<PS_psp_405 *>(dev))->is_UdpateAllTheStatusValues_allowed(any);}
+	{return (static_cast<PS_psp_405 *>(dev))->is_UpdateAllTheStatusValues_allowed(any);}
 };
 
 
