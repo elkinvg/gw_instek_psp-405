@@ -400,7 +400,8 @@ void PS_psp_405::udpate_all_the_status_values()
 	DEBUG_STREAM << "PS_psp_405::UdpateAllTheStatusValues()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::udpate_all_the_status_values) ENABLED START -----*/
 
-    string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
+    //string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
+    string reply = toSocketWriteAndReadBinary(GETALLTHESTATUSVALUE,sleepTm);
     std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
 
     std::array<double, 6> outVals = parsed.first;

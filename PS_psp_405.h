@@ -66,99 +66,99 @@ class PS_psp_405 : public PowerSuppliesAbst_ns::PowerSuppliesAbst
 
 //	Add your own data members
 private:
-    //const string GETALLTHESTATUSVALUE = {'L', 13};
-    //const string GETPRESENTOUTVOLT = {'V', 13};
-    //const string GETPRESENTOUTCURR = {'A', 13};
+    const string GETALLTHESTATUSVALUE = {'L', 13};
+    const string GETPRESENTOUTVOLT = {'V', 13};
+    const string GETPRESENTOUTCURR = {'A', 13};
 
-    //const string GETMAXVOLTLIMIT = { 'U', 13 };
-    //const string GETMAXCURRLIMIT = { 'I', 13 };
-    //const string GETPRESENTSTATUS = { 'F', 13 };
+    const string GETMAXVOLTLIMIT = { 'U', 13 };
+    const string GETMAXCURRLIMIT = { 'I', 13 };
+    const string GETPRESENTSTATUS = { 'F', 13 };
 
-    //const string SETMAXCURRLIMIT = { 'S', 'I', 'M', 13 };
-    //const string SETMAXVOLTLIMIT = { 'S', 'U', 'M', 13 };
+    const string SETMAXCURRLIMIT = { 'S', 'I', 'M', 13 };
+    const string SETMAXVOLTLIMIT = { 'S', 'U', 'M', 13 };
 
-    //const string SETRELAYSTATUSTOON = { 'K', 'O', 'E', 13 };
-    //const string SETRELAYSTATUSTOOFF = { 'K', 'O', 'D', 13 };
+    const string SETRELAYSTATUSTOON = { 'K', 'O', 'E', 13 };
+    const string SETRELAYSTATUSTOOFF = { 'K', 'O', 'D', 13 };
 
-    //const string SETOUTVOLTVALUE = { 'S', 'V', ' ' };
-    //const string SETVOLTLIMIT = { 'S', 'U', ' ' };
-    //const string SETCURRLIMIT = { 'S', 'I', ' ' };
-
-    //----------------------------------------------//
-
-    /**
-    * To obtain all the status values of the power supply
-    */    
-    string GETALLTHESTATUSVALUE = "L";
-
-    //----------------------------------------------//
-    /**
-    * The present output voltage, the unit is V.
-    */
-    string GETPRESENTOUTVOLT = "V";
-
-    /**
-    * The present output current, the unit is A.
-    */
-    string GETPRESENTOUTCURR = "A";
+    const string SETOUTVOLTVALUE = { 'S', 'V', ' ' };
+    const string SETVOLTLIMIT = { 'S', 'U', ' ' };
+    const string SETCURRLIMIT = { 'S', 'I', ' ' };
 
     //----------------------------------------------//
 
-    /**
-    * The maximum voltage limit at present, the unit is V.
-    */
-    string GETMAXVOLTLIMIT = "U";
+//    /**
+//    * To obtain all the status values of the power supply
+//    */
+//    string GETALLTHESTATUSVALUE = "L";
 
-    /**
-    * The maximum current limit at present, the unit is A
-    */
-    string GETMAXCURRLIMIT = "I";
+//    //----------------------------------------------//
+//    /**
+//    * The present output voltage, the unit is V.
+//    */
+//    string GETPRESENTOUTVOLT = "V";
 
-    /**
-    * The present status of the power supply
-    */
-    string GETPRESENTSTATUS = "F";
+//    /**
+//    * The present output current, the unit is A.
+//    */
+//    string GETPRESENTOUTCURR = "A";
 
-    //----------------------------------------------//
+//    //----------------------------------------------//
 
-    /**
-    * When the message of SIM<cr> (SUM<cr>) is sent to the power supply from
-    * computer, the power supply will set the (current) voltage limit to the maximum
-    * immediately
-    */
+//    /**
+//    * The maximum voltage limit at present, the unit is V.
+//    */
+//    string GETMAXVOLTLIMIT = "U";
 
-    string SETMAXCURRLIMIT = "SIM";
-    string SETMAXVOLTLIMIT = "SUM";
+//    /**
+//    * The maximum current limit at present, the unit is A
+//    */
+//    string GETMAXCURRLIMIT = "I";
 
-    //----------------------------------------------//
+//    /**
+//    * The present status of the power supply
+//    */
+//    string GETPRESENTSTATUS = "F";
 
-    /**
-    * Set the Relay status to ON.
-    */
-    string SETRELAYSTATUSTOON = "KOE";
+//    //----------------------------------------------//
+
+//    /**
+//    * When the message of SIM<cr> (SUM<cr>) is sent to the power supply from
+//    * computer, the power supply will set the (current) voltage limit to the maximum
+//    * immediately
+//    */
+
+//    string SETMAXCURRLIMIT = "SIM";
+//    string SETMAXVOLTLIMIT = "SUM";
+
+//    //----------------------------------------------//
+
+//    /**
+//    * Set the Relay status to ON.
+//    */
+//    string SETRELAYSTATUSTOON = "KOE";
     
-    /**
-    * Set the Relay status to OFF.
-    */
-    string SETRELAYSTATUSTOOFF = "KOD";
+//    /**
+//    * Set the Relay status to OFF.
+//    */
+//    string SETRELAYSTATUSTOOFF = "KOD";
 
-    //----------------------------------------------//
+//    //----------------------------------------------//
 
 
-    /**
-    * Set the output voltage value.
-    */
-    string SETOUTVOLTVALUE = "SV ";
+//    /**
+//    * Set the output voltage value.
+//    */
+//    string SETOUTVOLTVALUE = "SV ";
 
-    /**
-    * Set voltage limit.
-    */
-    string SETVOLTLIMIT = "SU ";
+//    /**
+//    * Set voltage limit.
+//    */
+//    string SETVOLTLIMIT = "SU ";
 
-    /**
-    * Set current limit.
-    */
-    string SETCURRLIMIT = "SI ";
+//    /**
+//    * Set current limit.
+//    */
+//    string SETCURRLIMIT = "SI ";
 
 
     const double errorOut = -1.0;
