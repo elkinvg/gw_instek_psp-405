@@ -185,6 +185,52 @@ public:
 	{return (static_cast<PS_psp_405 *>(dev))->is_UpdateAllTheStatusValues_allowed(any);}
 };
 
+//	Command SetVoltageLevel class definition
+class SetVoltageLevelClass : public Tango::Command
+{
+public:
+	SetVoltageLevelClass(const char   *name,
+	               Tango::CmdArgType in,
+				   Tango::CmdArgType out,
+				   const char        *in_desc,
+				   const char        *out_desc,
+				   Tango::DispLevel  level)
+	:Command(name,in,out,in_desc,out_desc, level)	{};
+
+	SetVoltageLevelClass(const char   *name,
+	               Tango::CmdArgType in,
+				   Tango::CmdArgType out)
+	:Command(name,in,out)	{};
+	~SetVoltageLevelClass() {};
+	
+	virtual CORBA::Any *execute (Tango::DeviceImpl *dev, const CORBA::Any &any);
+	virtual bool is_allowed (Tango::DeviceImpl *dev, const CORBA::Any &any)
+	{return (static_cast<PS_psp_405 *>(dev))->is_SetVoltageLevel_allowed(any);}
+};
+
+//	Command SetCurrentLevel class definition
+class SetCurrentLevelClass : public Tango::Command
+{
+public:
+	SetCurrentLevelClass(const char   *name,
+	               Tango::CmdArgType in,
+				   Tango::CmdArgType out,
+				   const char        *in_desc,
+				   const char        *out_desc,
+				   Tango::DispLevel  level)
+	:Command(name,in,out,in_desc,out_desc, level)	{};
+
+	SetCurrentLevelClass(const char   *name,
+	               Tango::CmdArgType in,
+				   Tango::CmdArgType out)
+	:Command(name,in,out)	{};
+	~SetCurrentLevelClass() {};
+	
+	virtual CORBA::Any *execute (Tango::DeviceImpl *dev, const CORBA::Any &any);
+	virtual bool is_allowed (Tango::DeviceImpl *dev, const CORBA::Any &any)
+	{return (static_cast<PS_psp_405 *>(dev))->is_SetCurrentLevel_allowed(any);}
+};
+
 
 /**
  *	The PS_psp_405Class singleton definition

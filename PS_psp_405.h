@@ -310,6 +310,22 @@ public:
 	 */
 	virtual void update_all_the_status_values();
 	virtual bool is_UpdateAllTheStatusValues_allowed(const CORBA::Any &any);
+	/**
+	 *	Command SetVoltageLevel related method
+	 *	Description: Sets the voltage level
+	 *
+	 *	@param argin Voltage level
+	 */
+	virtual void set_voltage_level(Tango::DevDouble argin);
+	virtual bool is_SetVoltageLevel_allowed(const CORBA::Any &any);
+	/**
+	 *	Command SetCurrentLevel related method
+	 *	Description: Sets or queries the current level
+	 *
+	 *	@param argin The current level
+	 */
+	virtual void set_current_level(Tango::DevDouble argin);
+	virtual bool is_SetCurrentLevel_allowed(const CORBA::Any &any);
 
 
 	//--------------------------------------------------------

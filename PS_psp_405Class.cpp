@@ -212,6 +212,46 @@ CORBA::Any *UpdateAllTheStatusValuesClass::execute(Tango::DeviceImpl *device, TA
 	return new CORBA::Any();
 }
 
+//--------------------------------------------------------
+/**
+ * method : 		SetVoltageLevelClass::execute()
+ * description : 	method to trigger the execution of the command.
+ *
+ * @param	device	The device on which the command must be executed
+ * @param	in_any	The command input data
+ *
+ *	returns The command output data (packed in the Any object)
+ */
+//--------------------------------------------------------
+CORBA::Any *SetVoltageLevelClass::execute(Tango::DeviceImpl *device, const CORBA::Any &in_any)
+{
+	cout2 << "SetVoltageLevelClass::execute(): arrived" << endl;
+	Tango::DevDouble argin;
+	extract(in_any, argin);
+	((static_cast<PS_psp_405 *>(device))->set_voltage_level(argin));
+	return new CORBA::Any();
+}
+
+//--------------------------------------------------------
+/**
+ * method : 		SetCurrentLevelClass::execute()
+ * description : 	method to trigger the execution of the command.
+ *
+ * @param	device	The device on which the command must be executed
+ * @param	in_any	The command input data
+ *
+ *	returns The command output data (packed in the Any object)
+ */
+//--------------------------------------------------------
+CORBA::Any *SetCurrentLevelClass::execute(Tango::DeviceImpl *device, const CORBA::Any &in_any)
+{
+	cout2 << "SetCurrentLevelClass::execute(): arrived" << endl;
+	Tango::DevDouble argin;
+	extract(in_any, argin);
+	((static_cast<PS_psp_405 *>(device))->set_current_level(argin));
+	return new CORBA::Any();
+}
+
 
 //===================================================================
 //	Properties management
@@ -714,6 +754,40 @@ void PS_psp_405Class::command_factory()
 				"",
 				Tango::OPERATOR);
 		command_list.push_back(pUpdateAllTheStatusValuesCmd);
+	}
+
+	//	Get inherited Command object SetVoltageLevel if already created
+	try
+	{
+		get_cmd_by_name("SetVoltageLevel");
+	}
+	catch (Tango::DevFailed &e)
+	{
+		//	Create SetVoltageLevel command object
+		SetVoltageLevelClass	*pSetVoltageLevelCmd =
+			new SetVoltageLevelClass("SetVoltageLevel",
+				Tango::DEV_DOUBLE, Tango::DEV_VOID,
+				"Voltage level",
+				"",
+				Tango::OPERATOR);
+		command_list.push_back(pSetVoltageLevelCmd);
+	}
+
+	//	Get inherited Command object SetCurrentLevel if already created
+	try
+	{
+		get_cmd_by_name("SetCurrentLevel");
+	}
+	catch (Tango::DevFailed &e)
+	{
+		//	Create SetCurrentLevel command object
+		SetCurrentLevelClass	*pSetCurrentLevelCmd =
+			new SetCurrentLevelClass("SetCurrentLevel",
+				Tango::DEV_DOUBLE, Tango::DEV_VOID,
+				"The current level",
+				"",
+				Tango::OPERATOR);
+		command_list.push_back(pSetCurrentLevelCmd);
 	}
 
 	/*----- PROTECTED REGION ID(PS_psp_405Class::command_factory_after) ENABLED START -----*/

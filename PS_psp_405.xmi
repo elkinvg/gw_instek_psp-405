@@ -3,7 +3,7 @@
   <classes name="PS_psp_405" pogoRevision="9.1">
     <description description="Device Server for power supply ``GW_INSTEK PSP-405``" title="GW_INSTEK PSP-405" sourcePath="D:\progrdir\vs12_2013\fortango\gw_instek_psp-405" language="Cpp" filestogenerate="XMI   file,Code files,Protected Regions" license="GPL" copyright="" hasMandatoryProperty="false" hasConcreteProperty="true" hasAbstractCommand="false" hasAbstractAttribute="false">
       <inheritances classname="Device_Impl" sourcePath=""/>
-      <inheritances classname="PowerSuppliesAbst" sourcePath="././PowerSuppliesAbst"/>
+      <inheritances classname="PowerSuppliesAbst" sourcePath="./././PowerSuppliesAbst"/>
       <identification contact="at jinr.ru - elkin" author="elkin" emailDomain="jinr.ru" classFamily="PowerSupply" siteSpecific="" platform="Unix Like" bus="Socket" manufacturer="none" reference=""/>
     </description>
     <deviceProperties name="Socket" description="Socket Tango device name in format ``domain/family/member``">
@@ -49,6 +49,24 @@
     <commands name="UpdateAllTheStatusValues" description="" execMethod="update_all_the_status_values" displayLevel="OPERATOR" polledPeriod="0">
       <argin description="">
         <type xsi:type="pogoDsl:VoidType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetVoltageLevel" description="Sets the voltage level" execMethod="set_voltage_level" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="Voltage level">
+        <type xsi:type="pogoDsl:DoubleType"/>
+      </argin>
+      <argout description="">
+        <type xsi:type="pogoDsl:VoidType"/>
+      </argout>
+      <status abstract="true" inherited="true" concrete="true" concreteHere="true"/>
+    </commands>
+    <commands name="SetCurrentLevel" description="Sets or queries the current level" execMethod="set_current_level" displayLevel="OPERATOR" polledPeriod="0" isDynamic="false">
+      <argin description="The current level">
+        <type xsi:type="pogoDsl:DoubleType"/>
       </argin>
       <argout description="">
         <type xsi:type="pogoDsl:VoidType"/>

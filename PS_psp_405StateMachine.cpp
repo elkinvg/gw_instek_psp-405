@@ -167,6 +167,36 @@ bool PS_psp_405::is_UpdateAllTheStatusValues_allowed(TANGO_UNUSED(const CORBA::A
 	return true;
 }
 
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_SetVoltageLevel_allowed()
+ *	Description : Execution allowed for SetVoltageLevel attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_SetVoltageLevel_allowed(TANGO_UNUSED(const CORBA::Any &any))
+{
+	//	Not any excluded states for SetVoltageLevel command.
+	/*----- PROTECTED REGION ID(PS_psp_405::SetVoltageLevelStateAllowed) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetVoltageLevelStateAllowed
+	return true;
+}
+
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_SetCurrentLevel_allowed()
+ *	Description : Execution allowed for SetCurrentLevel attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_SetCurrentLevel_allowed(TANGO_UNUSED(const CORBA::Any &any))
+{
+	//	Not any excluded states for SetCurrentLevel command.
+	/*----- PROTECTED REGION ID(PS_psp_405::SetCurrentLevelStateAllowed) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetCurrentLevelStateAllowed
+	return true;
+}
+
 
 /*----- PROTECTED REGION ID(PS_psp_405::PS_psp_405StateAllowed.AdditionalMethods) ENABLED START -----*/
 

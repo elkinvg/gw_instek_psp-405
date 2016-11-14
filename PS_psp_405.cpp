@@ -61,6 +61,8 @@ static const char *RcsId = "$Id:  $";
 //  On                        |  on
 //  Off                       |  off
 //  UpdateAllTheStatusValues  |  update_all_the_status_values
+//  SetVoltageLevel           |  set_voltage_level
+//  SetCurrentLevel           |  set_current_level
 //================================================================
 
 //================================================================
@@ -414,6 +416,40 @@ void PS_psp_405::update_all_the_status_values()
 
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::update_all_the_status_values
+}
+//--------------------------------------------------------
+/**
+ *	Command SetVoltageLevel related method
+ *	Description: Sets the voltage level
+ *
+ *	@param argin Voltage level
+ */
+//--------------------------------------------------------
+void PS_psp_405::set_voltage_level(Tango::DevDouble argin)
+{
+	DEBUG_STREAM << "PS_psp_405::SetVoltageLevel()  - " << device_name << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::set_voltage_level) ENABLED START -----*/
+	
+	//	Add your own code
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_voltage_level
+}
+//--------------------------------------------------------
+/**
+ *	Command SetCurrentLevel related method
+ *	Description: Sets or queries the current level
+ *
+ *	@param argin The current level
+ */
+//--------------------------------------------------------
+void PS_psp_405::set_current_level(Tango::DevDouble argin)
+{
+	DEBUG_STREAM << "PS_psp_405::SetCurrentLevel()  - " << device_name << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::set_current_level) ENABLED START -----*/
+	
+	//	Add your own code
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_current_level
 }
 //--------------------------------------------------------
 /**
