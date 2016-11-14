@@ -405,10 +405,13 @@ void PS_psp_405::update_all_the_status_values()
     std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
     std::array<double, 6> outVals = parsed.first;
     std::bitset<7> gettedBits = parsed.second;
+
     attr_volt_meas_read[0] = outVals[0];
     attr_curr_meas_read[0] = outVals[1];
     attr_volt_level_read[0] = outVals[3];
     attr_curr_level_read[0] = outVals[4];
+
+
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::update_all_the_status_values
 }
@@ -489,6 +492,30 @@ std::pair<std::array<double, 6>, std::bitset<7> > PS_psp_405::parsingOfAllStatus
     catch (...) {}
 
     return make_pair(out,outBitset);
+}
+
+void PS_psp_405::checkStatusOutput(std::bitset<7> statusBits) {
+    /**
+    F123456<cr>
+    6 - 0: no data form PS 1: data from PS
+    5 - 1st = the relay status   0:OFF   1 : ON
+    4 - 2nd = the temperature status   0 : Normal   1 : Overheat
+    3 - 3rd = the wheel knob status   0 : Normal   1 : Fine
+    2 - 4th = the wheel knob status   0 : Lock   1 : Unlock
+    1 - 5th = the remote status   0 : Normal   1 : Remote(*)
+    0 - 6th = the lock status   0 : Unlock   1 : Lock
+    */
+    if (!statusBits[6])
+        return;
+
+    if (statusBits[5]) {
+        set_state(Tango::ON);
+        set_status("PowerSupply is ON");
+    }
+    else {
+        set_state(Tango::OFF);
+        set_status("PowerSupply is OFF");
+    }
 }
 
 
