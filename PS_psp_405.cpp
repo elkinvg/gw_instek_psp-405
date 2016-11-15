@@ -43,6 +43,8 @@ static const char *RcsId = "$Id:  $";
 #include <PS_psp_405.h>
 #include <PS_psp_405Class.h>
 
+#include <iomanip>
+
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405.cpp
 
 /**
@@ -429,7 +431,9 @@ void PS_psp_405::set_voltage_level(Tango::DevDouble argin)
 	DEBUG_STREAM << "PS_psp_405::SetVoltageLevel()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::set_voltage_level) ENABLED START -----*/
 	
-	//	Add your own code
+    if (argin < 0 || argin > maxVolt) {
+        ERROR_STREAM << "Setting voltage level " << argin << " more than minimum value  or less than maximum value" << endl;
+    }
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_voltage_level
 }
@@ -446,7 +450,9 @@ void PS_psp_405::set_current_level(Tango::DevDouble argin)
 	DEBUG_STREAM << "PS_psp_405::SetCurrentLevel()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::set_current_level) ENABLED START -----*/
 	
-	//	Add your own code
+    if (argin < 0 || argin > maxCurr) {
+        ERROR_STREAM << "Setting current level " << argin << " more than minimum value  or less than maximum value" << endl;
+    }
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_current_level
 }
@@ -553,6 +559,19 @@ void PS_psp_405::checkStatusOutput(std::bitset<7> statusBits) {
         set_state(Tango::OFF);
         set_status("PowerSupply is OFF");
     }
+}
+
+string PS_psp_405::formatInput(string preposition, double dataIn, unsigned short forSetw, unsigned short forSetPrec) {
+    stringstream ss;
+    /**
+    * For x.xxx forSetw = 5 forSetPrec = 3 Out: 0.100 1.230
+    * For xx.xx forSetw = 5 forSetPrec = 2 Out: 00.10 12.30
+    * For xx    forSetw = 2 forSetPrec = 0 Out: 01 10 25
+    */
+    ss << preposition;
+    ss << setfill('0') << setw(forSetw) << fixed << setprecision(forSetPrec) << dataIn;
+    ss << "\r\n";
+    return ss.str();
 }
 
 

@@ -163,6 +163,8 @@ private:
 
     const double errorOut = -1.0;
     const unsigned int sleepTm = 200;
+    const double maxVolt = 40.0;
+    const double maxCurr = 5.0;
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::Data Members
 
@@ -342,6 +344,8 @@ public:
 private:
     std::pair<std::array<double, 6>,std::bitset<7>> parsingOfAllStatusValues(string statusValues);
     void checkStatusOutput(std::bitset<7> statusBits);
+
+    string formatInput(string preposition, double dataIn, unsigned short forSetw, unsigned short forSetPrec);
 
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::Additional Method prototypes
