@@ -162,7 +162,7 @@ private:
 
 
     const double errorOut = -1.0;
-    const unsigned int sleepTm = 300;
+    const unsigned int sleepTm = 200;
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::Data Members
 
