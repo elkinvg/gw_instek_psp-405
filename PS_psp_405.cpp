@@ -186,6 +186,7 @@ void PS_psp_405::init_device()
     attr_volt_level_read[0] = -1;
     attr_curr_meas_read[0] = -1;
     attr_volt_meas_read[0] = -1;
+    attr_volt_level_read[0] = -1;
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::init_device
 }
