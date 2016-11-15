@@ -248,7 +248,6 @@ void PS_psp_405::always_executed_hook()
 	/*----- PROTECTED REGION ID(PS_psp_405::always_executed_hook) ENABLED START -----*/
 	
     //	code always executed before all requests
-    checkSocketState();
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::always_executed_hook
 }

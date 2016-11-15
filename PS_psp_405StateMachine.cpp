@@ -64,7 +64,8 @@ bool PS_psp_405::is_volt_meas_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
 	//	Not any excluded states for volt_meas attribute in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::volt_measStateAllowed_READ) ENABLED START -----*/
-	
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::volt_measStateAllowed_READ
 	return true;
 }
@@ -79,8 +80,8 @@ bool PS_psp_405::is_curr_meas_allowed(TANGO_UNUSED(Tango::AttReqType type))
 {
 
 	//	Not any excluded states for curr_meas attribute in read access.
-	/*----- PROTECTED REGION ID(PS_psp_405::curr_measStateAllowed_READ) ENABLED START -----*/
-	
+    /*----- PROTECTED REGION ID(PS_psp_405::curr_measStateAllowed_READ) ENABLED START -----*/
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::curr_measStateAllowed_READ
 	return true;
 }
@@ -96,7 +97,8 @@ bool PS_psp_405::is_volt_level_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
 	//	Not any excluded states for volt_level attribute in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::volt_levelStateAllowed_READ) ENABLED START -----*/
-	
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::volt_levelStateAllowed_READ
 	return true;
 }
@@ -112,7 +114,8 @@ bool PS_psp_405::is_curr_level_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
 	//	Not any excluded states for curr_level attribute in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::curr_levelStateAllowed_READ) ENABLED START -----*/
-	
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::curr_levelStateAllowed_READ
 	return true;
 }
@@ -132,7 +135,8 @@ bool PS_psp_405::is_On_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
 	//	Not any excluded states for On command.
 	/*----- PROTECTED REGION ID(PS_psp_405::OnStateAllowed) ENABLED START -----*/
-	
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::OnStateAllowed
 	return true;
 }
@@ -147,7 +151,8 @@ bool PS_psp_405::is_Off_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
 	//	Not any excluded states for Off command.
 	/*----- PROTECTED REGION ID(PS_psp_405::OffStateAllowed) ENABLED START -----*/
-	
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::OffStateAllowed
 	return true;
 }
@@ -161,8 +166,9 @@ bool PS_psp_405::is_Off_allowed(TANGO_UNUSED(const CORBA::Any &any))
 bool PS_psp_405::is_UpdateAllTheStatusValues_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
 	//	Not any excluded states for UpdateAllTheStatusValues command.
-	/*----- PROTECTED REGION ID(PS_psp_405::UpdateAllTheStatusValuesStateAllowed) ENABLED START -----*/
-	
+    /*----- PROTECTED REGION ID(PS_psp_405::UpdateAllTheStatusValuesStateAllowed) ENABLED START -----*/
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::UpdateAllTheStatusValuesStateAllowed
 	return true;
 }
@@ -177,7 +183,8 @@ bool PS_psp_405::is_SetVoltageLevel_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
 	//	Not any excluded states for SetVoltageLevel command.
 	/*----- PROTECTED REGION ID(PS_psp_405::SetVoltageLevelStateAllowed) ENABLED START -----*/
-	
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetVoltageLevelStateAllowed
 	return true;
 }
@@ -192,7 +199,8 @@ bool PS_psp_405::is_SetCurrentLevel_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
 	//	Not any excluded states for SetCurrentLevel command.
 	/*----- PROTECTED REGION ID(PS_psp_405::SetCurrentLevelStateAllowed) ENABLED START -----*/
-	
+
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetCurrentLevelStateAllowed
 	return true;
 }
