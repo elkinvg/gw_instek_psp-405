@@ -80,7 +80,7 @@ bool PS_psp_405::is_curr_meas_allowed(TANGO_UNUSED(Tango::AttReqType type))
 {
 
 	//	Not any excluded states for curr_meas attribute in read access.
-    /*----- PROTECTED REGION ID(PS_psp_405::curr_measStateAllowed_READ) ENABLED START -----*/
+	/*----- PROTECTED REGION ID(PS_psp_405::curr_measStateAllowed_READ) ENABLED START -----*/
     return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::curr_measStateAllowed_READ
 	return true;
@@ -117,6 +117,22 @@ bool PS_psp_405::is_curr_level_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
     return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::curr_levelStateAllowed_READ
+	return true;
+}
+
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_volt_limit_allowed()
+ *	Description : Execution allowed for volt_limit attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_volt_limit_allowed(TANGO_UNUSED(Tango::AttReqType type))
+{
+
+	//	Not any excluded states for volt_limit attribute in read access.
+	/*----- PROTECTED REGION ID(PS_psp_405::volt_limitStateAllowed_READ) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::volt_limitStateAllowed_READ
 	return true;
 }
 
@@ -166,7 +182,7 @@ bool PS_psp_405::is_Off_allowed(TANGO_UNUSED(const CORBA::Any &any))
 bool PS_psp_405::is_UpdateAllTheStatusValues_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
 	//	Not any excluded states for UpdateAllTheStatusValues command.
-    /*----- PROTECTED REGION ID(PS_psp_405::UpdateAllTheStatusValuesStateAllowed) ENABLED START -----*/
+	/*----- PROTECTED REGION ID(PS_psp_405::UpdateAllTheStatusValuesStateAllowed) ENABLED START -----*/
 
     return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::UpdateAllTheStatusValuesStateAllowed
@@ -202,6 +218,21 @@ bool PS_psp_405::is_SetCurrentLevel_allowed(TANGO_UNUSED(const CORBA::Any &any))
 
     return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetCurrentLevelStateAllowed
+	return true;
+}
+
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_SetVoltageLimit_allowed()
+ *	Description : Execution allowed for SetVoltageLimit attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_SetVoltageLimit_allowed(TANGO_UNUSED(const CORBA::Any &any))
+{
+	//	Not any excluded states for SetVoltageLimit command.
+	/*----- PROTECTED REGION ID(PS_psp_405::SetVoltageLimitStateAllowed) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetVoltageLimitStateAllowed
 	return true;
 }
 

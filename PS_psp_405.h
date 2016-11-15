@@ -179,6 +179,7 @@ public:
 	Tango::DevDouble	*attr_curr_meas_read;
 	Tango::DevDouble	*attr_volt_level_read;
 	Tango::DevDouble	*attr_curr_level_read;
+	Tango::DevDouble	*attr_volt_limit_read;
 
 //	Constructors and destructors
 public:
@@ -276,6 +277,15 @@ public:
  */
 	virtual void read_curr_level(Tango::Attribute &attr);
 	virtual bool is_curr_level_allowed(Tango::AttReqType type);
+/**
+ *	Attribute volt_limit related methods
+ *	Description: 
+ *
+ *	Data type:	Tango::DevDouble
+ *	Attr type:	Scalar
+ */
+	virtual void read_volt_limit(Tango::Attribute &attr);
+	virtual bool is_volt_limit_allowed(Tango::AttReqType type);
 
 
 	//--------------------------------------------------------
@@ -328,6 +338,14 @@ public:
 	 */
 	virtual void set_current_level(Tango::DevDouble argin);
 	virtual bool is_SetCurrentLevel_allowed(const CORBA::Any &any);
+	/**
+	 *	Command SetVoltageLimit related method
+	 *	Description: Set voltage limit.
+	 *
+	 *	@param argin The voltage limit max = 40.0V
+	 */
+	virtual void set_voltage_limit(Tango::DevDouble argin);
+	virtual bool is_SetVoltageLimit_allowed(const CORBA::Any &any);
 
 
 	//--------------------------------------------------------
