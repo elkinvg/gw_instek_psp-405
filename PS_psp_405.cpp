@@ -65,17 +65,17 @@ static const char *RcsId = "$Id:  $";
 //  UpdateAllTheStatusValues  |  update_all_the_status_values
 //  SetVoltageLevel           |  set_voltage_level
 //  SetCurrentLevel           |  set_current_level
-//  SetVoltageLimit           |  set_voltage_limit
+//  SetMaximumVoltageLimit    |  set_maximum_voltage_limit
 //================================================================
 
 //================================================================
 //  Attributes managed are:
 //================================================================
-//  volt_meas   |  Tango::DevDouble	Scalar
-//  curr_meas   |  Tango::DevDouble	Scalar
-//  volt_level  |  Tango::DevDouble	Scalar
-//  curr_level  |  Tango::DevDouble	Scalar
-//  volt_limit  |  Tango::DevDouble	Scalar
+//  volt_meas           |  Tango::DevDouble	Scalar
+//  curr_meas           |  Tango::DevDouble	Scalar
+//  volt_level          |  Tango::DevDouble	Scalar
+//  curr_level          |  Tango::DevDouble	Scalar
+//  maximum_volt_limit  |  Tango::DevDouble	Scalar
 //================================================================
 
 namespace PS_psp_405_ns
@@ -138,7 +138,7 @@ void PS_psp_405::delete_device()
 	delete[] attr_curr_meas_read;
 	delete[] attr_volt_level_read;
 	delete[] attr_curr_level_read;
-	delete[] attr_volt_limit_read;
+	delete[] attr_maximum_volt_limit_read;
 
 	if (Tango::Util::instance()->is_svr_shutting_down()==false  &&
 		Tango::Util::instance()->is_device_restarting(device_name)==false &&
@@ -178,7 +178,7 @@ void PS_psp_405::init_device()
 	attr_curr_meas_read = new Tango::DevDouble[1];
 	attr_volt_level_read = new Tango::DevDouble[1];
 	attr_curr_level_read = new Tango::DevDouble[1];
-	attr_volt_limit_read = new Tango::DevDouble[1];
+	attr_maximum_volt_limit_read = new Tango::DevDouble[1];
 	/*----- PROTECTED REGION ID(PS_psp_405::init_device) ENABLED START -----*/
 	
     initTangoSocket(socket);
@@ -349,21 +349,21 @@ void PS_psp_405::read_curr_level(Tango::Attribute &attr)
 }
 //--------------------------------------------------------
 /**
- *	Read attribute volt_limit related method
+ *	Read attribute maximum_volt_limit related method
  *	Description: 
  *
  *	Data type:	Tango::DevDouble
  *	Attr type:	Scalar
  */
 //--------------------------------------------------------
-void PS_psp_405::read_volt_limit(Tango::Attribute &attr)
+void PS_psp_405::read_maximum_volt_limit(Tango::Attribute &attr)
 {
-	DEBUG_STREAM << "PS_psp_405::read_volt_limit(Tango::Attribute &attr) entering... " << endl;
-	/*----- PROTECTED REGION ID(PS_psp_405::read_volt_limit) ENABLED START -----*/
+	DEBUG_STREAM << "PS_psp_405::read_maximum_volt_limit(Tango::Attribute &attr) entering... " << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::read_maximum_volt_limit) ENABLED START -----*/
 	//	Set the attribute value
-	attr.set_value(attr_volt_limit_read);
+    attr.set_value(attr_maximum_volt_limit_read);
 	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_volt_limit
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_maximum_volt_limit
 }
 
 //--------------------------------------------------------
@@ -481,26 +481,25 @@ void PS_psp_405::set_current_level(Tango::DevDouble argin)
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_current_level
 }
-
 //--------------------------------------------------------
 /**
- *	Command SetVoltageLimit related method
- *	Description: Set voltage limit.
+ *	Command SetMaximumVoltageLimit related method
+ *	Description: Set maximum voltage limit.
  *
  *	@param argin The voltage limit max = 40.0V
  */
 //--------------------------------------------------------
-void PS_psp_405::set_voltage_limit(Tango::DevDouble argin)
+void PS_psp_405::set_maximum_voltage_limit(Tango::DevDouble argin)
 {
-	DEBUG_STREAM << "PS_psp_405::SetVoltageLimit()  - " << device_name << endl;
-	/*----- PROTECTED REGION ID(PS_psp_405::set_voltage_limit) ENABLED START -----*/
+	DEBUG_STREAM << "PS_psp_405::SetMaximumVoltageLimit()  - " << device_name << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::set_maximum_voltage_limit) ENABLED START -----*/
 	
     if (argin < 0 || argin > maxVolt) {
         ERROR_STREAM << "Setting voltage limit " << argin << " more than minimum value  or less than maximum value" << endl;
         return;
     }
 	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_voltage_limit
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_maximum_voltage_limit
 }
 //--------------------------------------------------------
 /**

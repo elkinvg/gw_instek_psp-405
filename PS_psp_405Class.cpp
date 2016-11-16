@@ -254,7 +254,7 @@ CORBA::Any *SetCurrentLevelClass::execute(Tango::DeviceImpl *device, const CORBA
 
 //--------------------------------------------------------
 /**
- * method : 		SetVoltageLimitClass::execute()
+ * method : 		SetMaximumVoltageLimitClass::execute()
  * description : 	method to trigger the execution of the command.
  *
  * @param	device	The device on which the command must be executed
@@ -263,12 +263,12 @@ CORBA::Any *SetCurrentLevelClass::execute(Tango::DeviceImpl *device, const CORBA
  *	returns The command output data (packed in the Any object)
  */
 //--------------------------------------------------------
-CORBA::Any *SetVoltageLimitClass::execute(Tango::DeviceImpl *device, const CORBA::Any &in_any)
+CORBA::Any *SetMaximumVoltageLimitClass::execute(Tango::DeviceImpl *device, const CORBA::Any &in_any)
 {
-	cout2 << "SetVoltageLimitClass::execute(): arrived" << endl;
+	cout2 << "SetMaximumVoltageLimitClass::execute(): arrived" << endl;
 	Tango::DevDouble argin;
 	extract(in_any, argin);
-	((static_cast<PS_psp_405 *>(device))->set_voltage_limit(argin));
+	((static_cast<PS_psp_405 *>(device))->set_maximum_voltage_limit(argin));
 	return new CORBA::Any();
 }
 
@@ -677,29 +677,29 @@ void PS_psp_405Class::attribute_factory(vector<Tango::Attr *> &att_list)
 		att_list.push_back(curr_level);
 	}
 
-	//	Attribute : volt_limit
-	volt_limitAttrib	*volt_limit = new volt_limitAttrib();
-	Tango::UserDefaultAttrProp	volt_limit_prop;
-	//	description	not set for volt_limit
-	//	label	not set for volt_limit
-	//	unit	not set for volt_limit
-	//	standard_unit	not set for volt_limit
-	//	display_unit	not set for volt_limit
-	//	format	not set for volt_limit
-	//	max_value	not set for volt_limit
-	//	min_value	not set for volt_limit
-	//	max_alarm	not set for volt_limit
-	//	min_alarm	not set for volt_limit
-	//	max_warning	not set for volt_limit
-	//	min_warning	not set for volt_limit
-	//	delta_t	not set for volt_limit
-	//	delta_val	not set for volt_limit
+	//	Attribute : maximum_volt_limit
+	maximum_volt_limitAttrib	*maximum_volt_limit = new maximum_volt_limitAttrib();
+	Tango::UserDefaultAttrProp	maximum_volt_limit_prop;
+	//	description	not set for maximum_volt_limit
+	//	label	not set for maximum_volt_limit
+	//	unit	not set for maximum_volt_limit
+	//	standard_unit	not set for maximum_volt_limit
+	//	display_unit	not set for maximum_volt_limit
+	//	format	not set for maximum_volt_limit
+	//	max_value	not set for maximum_volt_limit
+	//	min_value	not set for maximum_volt_limit
+	//	max_alarm	not set for maximum_volt_limit
+	//	min_alarm	not set for maximum_volt_limit
+	//	max_warning	not set for maximum_volt_limit
+	//	min_warning	not set for maximum_volt_limit
+	//	delta_t	not set for maximum_volt_limit
+	//	delta_val	not set for maximum_volt_limit
 	
-	volt_limit->set_default_properties(volt_limit_prop);
+	maximum_volt_limit->set_default_properties(maximum_volt_limit_prop);
 	//	Not Polled
-	volt_limit->set_disp_level(Tango::OPERATOR);
+	maximum_volt_limit->set_disp_level(Tango::OPERATOR);
 	//	Not Memorized
-	att_list.push_back(volt_limit);
+	att_list.push_back(maximum_volt_limit);
 
 
 	//	Create a list of static attributes
@@ -834,14 +834,14 @@ void PS_psp_405Class::command_factory()
 		command_list.push_back(pSetCurrentLevelCmd);
 	}
 
-	//	Command SetVoltageLimit
-	SetVoltageLimitClass	*pSetVoltageLimitCmd =
-		new SetVoltageLimitClass("SetVoltageLimit",
+	//	Command SetMaximumVoltageLimit
+	SetMaximumVoltageLimitClass	*pSetMaximumVoltageLimitCmd =
+		new SetMaximumVoltageLimitClass("SetMaximumVoltageLimit",
 			Tango::DEV_DOUBLE, Tango::DEV_VOID,
 			"The voltage limit max = 40.0V",
 			"",
 			Tango::OPERATOR);
-	command_list.push_back(pSetVoltageLimitCmd);
+	command_list.push_back(pSetMaximumVoltageLimitCmd);
 
 	/*----- PROTECTED REGION ID(PS_psp_405Class::command_factory_after) ENABLED START -----*/
 	

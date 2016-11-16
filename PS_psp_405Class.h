@@ -112,17 +112,17 @@ public:
 		{return (static_cast<PS_psp_405 *>(dev))->is_curr_level_allowed(ty);}
 };
 
-//	Attribute volt_limit class definition
-class volt_limitAttrib: public Tango::Attr
+//	Attribute maximum_volt_limit class definition
+class maximum_volt_limitAttrib: public Tango::Attr
 {
 public:
-	volt_limitAttrib():Attr("volt_limit",
+	maximum_volt_limitAttrib():Attr("maximum_volt_limit",
 			Tango::DEV_DOUBLE, Tango::READ) {};
-	~volt_limitAttrib() {};
+	~maximum_volt_limitAttrib() {};
 	virtual void read(Tango::DeviceImpl *dev,Tango::Attribute &att)
-		{(static_cast<PS_psp_405 *>(dev))->read_volt_limit(att);}
+		{(static_cast<PS_psp_405 *>(dev))->read_maximum_volt_limit(att);}
 	virtual bool is_allowed(Tango::DeviceImpl *dev,Tango::AttReqType ty)
-		{return (static_cast<PS_psp_405 *>(dev))->is_volt_limit_allowed(ty);}
+		{return (static_cast<PS_psp_405 *>(dev))->is_maximum_volt_limit_allowed(ty);}
 };
 
 
@@ -244,11 +244,11 @@ public:
 	{return (static_cast<PS_psp_405 *>(dev))->is_SetCurrentLevel_allowed(any);}
 };
 
-//	Command SetVoltageLimit class definition
-class SetVoltageLimitClass : public Tango::Command
+//	Command SetMaximumVoltageLimit class definition
+class SetMaximumVoltageLimitClass : public Tango::Command
 {
 public:
-	SetVoltageLimitClass(const char   *name,
+	SetMaximumVoltageLimitClass(const char   *name,
 	               Tango::CmdArgType in,
 				   Tango::CmdArgType out,
 				   const char        *in_desc,
@@ -256,15 +256,15 @@ public:
 				   Tango::DispLevel  level)
 	:Command(name,in,out,in_desc,out_desc, level)	{};
 
-	SetVoltageLimitClass(const char   *name,
+	SetMaximumVoltageLimitClass(const char   *name,
 	               Tango::CmdArgType in,
 				   Tango::CmdArgType out)
 	:Command(name,in,out)	{};
-	~SetVoltageLimitClass() {};
+	~SetMaximumVoltageLimitClass() {};
 	
 	virtual CORBA::Any *execute (Tango::DeviceImpl *dev, const CORBA::Any &any);
 	virtual bool is_allowed (Tango::DeviceImpl *dev, const CORBA::Any &any)
-	{return (static_cast<PS_psp_405 *>(dev))->is_SetVoltageLimit_allowed(any);}
+	{return (static_cast<PS_psp_405 *>(dev))->is_SetMaximumVoltageLimit_allowed(any);}
 };
 
 

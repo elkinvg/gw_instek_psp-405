@@ -122,17 +122,17 @@ bool PS_psp_405::is_curr_level_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
 //--------------------------------------------------------
 /**
- *	Method      : PS_psp_405::is_volt_limit_allowed()
- *	Description : Execution allowed for volt_limit attribute
+ *	Method      : PS_psp_405::is_maximum_volt_limit_allowed()
+ *	Description : Execution allowed for maximum_volt_limit attribute
  */
 //--------------------------------------------------------
-bool PS_psp_405::is_volt_limit_allowed(TANGO_UNUSED(Tango::AttReqType type))
+bool PS_psp_405::is_maximum_volt_limit_allowed(TANGO_UNUSED(Tango::AttReqType type))
 {
 
-	//	Not any excluded states for volt_limit attribute in read access.
-	/*----- PROTECTED REGION ID(PS_psp_405::volt_limitStateAllowed_READ) ENABLED START -----*/
+	//	Not any excluded states for maximum_volt_limit attribute in read access.
+	/*----- PROTECTED REGION ID(PS_psp_405::maximum_volt_limitStateAllowed_READ) ENABLED START -----*/
 	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::volt_limitStateAllowed_READ
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::maximum_volt_limitStateAllowed_READ
 	return true;
 }
 
@@ -223,16 +223,16 @@ bool PS_psp_405::is_SetCurrentLevel_allowed(TANGO_UNUSED(const CORBA::Any &any))
 
 //--------------------------------------------------------
 /**
- *	Method      : PS_psp_405::is_SetVoltageLimit_allowed()
- *	Description : Execution allowed for SetVoltageLimit attribute
+ *	Method      : PS_psp_405::is_SetMaximumVoltageLimit_allowed()
+ *	Description : Execution allowed for SetMaximumVoltageLimit attribute
  */
 //--------------------------------------------------------
-bool PS_psp_405::is_SetVoltageLimit_allowed(TANGO_UNUSED(const CORBA::Any &any))
+bool PS_psp_405::is_SetMaximumVoltageLimit_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
-	//	Not any excluded states for SetVoltageLimit command.
-	/*----- PROTECTED REGION ID(PS_psp_405::SetVoltageLimitStateAllowed) ENABLED START -----*/
+	//	Not any excluded states for SetMaximumVoltageLimit command.
+	/*----- PROTECTED REGION ID(PS_psp_405::SetMaximumVoltageLimitStateAllowed) ENABLED START -----*/
 	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetVoltageLimitStateAllowed
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetMaximumVoltageLimitStateAllowed
 	return true;
 }
 
