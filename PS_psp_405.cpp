@@ -71,10 +71,14 @@ static const char *RcsId = "$Id:  $";
 //================================================================
 //  Attributes managed are:
 //================================================================
-//  volt_meas   |  Tango::DevDouble	Scalar
-//  curr_meas   |  Tango::DevDouble	Scalar
-//  volt_level  |  Tango::DevDouble	Scalar
-//  curr_level  |  Tango::DevDouble	Scalar
+//  volt_meas           |  Tango::DevDouble	Scalar
+//  curr_meas           |  Tango::DevDouble	Scalar
+//  volt_level          |  Tango::DevDouble	Scalar
+//  curr_level          |  Tango::DevDouble	Scalar
+//  relay_status        |  Tango::DevBoolean	Scalar
+//  remote_status       |  Tango::DevBoolean	Scalar
+//  lock_status         |  Tango::DevBoolean	Scalar
+//  temperature_status  |  Tango::DevBoolean	Scalar
 //================================================================
 
 namespace PS_psp_405_ns
@@ -137,6 +141,10 @@ void PS_psp_405::delete_device()
 	delete[] attr_curr_meas_read;
 	delete[] attr_volt_level_read;
 	delete[] attr_curr_level_read;
+	delete[] attr_relay_status_read;
+	delete[] attr_remote_status_read;
+	delete[] attr_lock_status_read;
+	delete[] attr_temperature_status_read;
 
 	if (Tango::Util::instance()->is_svr_shutting_down()==false  &&
 		Tango::Util::instance()->is_device_restarting(device_name)==false &&
@@ -176,6 +184,10 @@ void PS_psp_405::init_device()
 	attr_curr_meas_read = new Tango::DevDouble[1];
 	attr_volt_level_read = new Tango::DevDouble[1];
 	attr_curr_level_read = new Tango::DevDouble[1];
+	attr_relay_status_read = new Tango::DevBoolean[1];
+	attr_remote_status_read = new Tango::DevBoolean[1];
+	attr_lock_status_read = new Tango::DevBoolean[1];
+	attr_temperature_status_read = new Tango::DevBoolean[1];
 	/*----- PROTECTED REGION ID(PS_psp_405::init_device) ENABLED START -----*/
 	
     initTangoSocket(socket);
@@ -184,6 +196,11 @@ void PS_psp_405::init_device()
     attr_curr_meas_read[0] = -1;
     attr_volt_meas_read[0] = -1;
     attr_volt_level_read[0] = -1;
+
+    attr_relay_status_read[0] = false;
+    attr_remote_status_read[0] = false;
+    attr_lock_status_read[0] = false;
+    attr_temperature_status_read[0] = false;
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::init_device
 }
@@ -344,6 +361,78 @@ void PS_psp_405::read_curr_level(Tango::Attribute &attr)
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_curr_level
 }
+//--------------------------------------------------------
+/**
+ *	Read attribute relay_status related method
+ *	Description: the relay status   0:OFF   1 : ON
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+//--------------------------------------------------------
+void PS_psp_405::read_relay_status(Tango::Attribute &attr)
+{
+	DEBUG_STREAM << "PS_psp_405::read_relay_status(Tango::Attribute &attr) entering... " << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::read_relay_status) ENABLED START -----*/
+	//	Set the attribute value
+	attr.set_value(attr_relay_status_read);
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_relay_status
+}
+//--------------------------------------------------------
+/**
+ *	Read attribute remote_status related method
+ *	Description: the remote status   0 : Normal   1 : Remote(*)
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+//--------------------------------------------------------
+void PS_psp_405::read_remote_status(Tango::Attribute &attr)
+{
+	DEBUG_STREAM << "PS_psp_405::read_remote_status(Tango::Attribute &attr) entering... " << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::read_remote_status) ENABLED START -----*/
+	//	Set the attribute value
+	attr.set_value(attr_remote_status_read);
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_remote_status
+}
+//--------------------------------------------------------
+/**
+ *	Read attribute lock_status related method
+ *	Description: the lock status   0 : Unlock   1 : Lock
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+//--------------------------------------------------------
+void PS_psp_405::read_lock_status(Tango::Attribute &attr)
+{
+	DEBUG_STREAM << "PS_psp_405::read_lock_status(Tango::Attribute &attr) entering... " << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::read_lock_status) ENABLED START -----*/
+	//	Set the attribute value
+	attr.set_value(attr_lock_status_read);
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_lock_status
+}
+//--------------------------------------------------------
+/**
+ *	Read attribute temperature_status related method
+ *	Description: the temperature status   0 : Normal   1 : Overheat
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+//--------------------------------------------------------
+void PS_psp_405::read_temperature_status(Tango::Attribute &attr)
+{
+	DEBUG_STREAM << "PS_psp_405::read_temperature_status(Tango::Attribute &attr) entering... " << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::read_temperature_status) ENABLED START -----*/
+	//	Set the attribute value
+	attr.set_value(attr_temperature_status_read);
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_temperature_status
+}
 
 //--------------------------------------------------------
 /**
@@ -415,6 +504,8 @@ void PS_psp_405::update_all_the_status_values()
     attr_curr_meas_read[0] = outVals[1];
     attr_volt_level_read[0] = outVals[3];
     attr_curr_level_read[0] = outVals[4];
+
+    checkStatusOutput(gettedBits);
 
 
 	
@@ -585,11 +676,19 @@ void PS_psp_405::checkStatusOutput(std::bitset<7> statusBits) {
     if (statusBits[5]) {
         set_state(Tango::ON);
         set_status("PowerSupply is ON");
+        attr_relay_status_read[0] = true;
     }
     else {
         set_state(Tango::OFF);
         set_status("PowerSupply is OFF");
+        attr_relay_status_read[0] = false;
     }
+
+
+    attr_lock_status_read[0] = statusBits[0];
+    attr_remote_status_read[0] = statusBits[1];
+    attr_temperature_status_read[0] = statusBits[4];
+    attr_relay_status_read[0] = statusBits[5];
 }
 
 string PS_psp_405::formatInput(string preposition, double dataIn, unsigned short forSetw, unsigned short forSetPrec) {

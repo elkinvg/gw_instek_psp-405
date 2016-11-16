@@ -677,6 +677,102 @@ void PS_psp_405Class::attribute_factory(vector<Tango::Attr *> &att_list)
 		att_list.push_back(curr_level);
 	}
 
+	//	Attribute : relay_status
+	relay_statusAttrib	*relay_status = new relay_statusAttrib();
+	Tango::UserDefaultAttrProp	relay_status_prop;
+	relay_status_prop.set_description("the relay status   0:OFF   1 : ON");
+	//	label	not set for relay_status
+	//	unit	not set for relay_status
+	//	standard_unit	not set for relay_status
+	//	display_unit	not set for relay_status
+	//	format	not set for relay_status
+	//	max_value	not set for relay_status
+	//	min_value	not set for relay_status
+	//	max_alarm	not set for relay_status
+	//	min_alarm	not set for relay_status
+	//	max_warning	not set for relay_status
+	//	min_warning	not set for relay_status
+	//	delta_t	not set for relay_status
+	//	delta_val	not set for relay_status
+	
+	relay_status->set_default_properties(relay_status_prop);
+	//	Not Polled
+	relay_status->set_disp_level(Tango::OPERATOR);
+	//	Not Memorized
+	att_list.push_back(relay_status);
+
+	//	Attribute : remote_status
+	remote_statusAttrib	*remote_status = new remote_statusAttrib();
+	Tango::UserDefaultAttrProp	remote_status_prop;
+	remote_status_prop.set_description("the remote status   0 : Normal   1 : Remote(*)");
+	//	label	not set for remote_status
+	//	unit	not set for remote_status
+	//	standard_unit	not set for remote_status
+	//	display_unit	not set for remote_status
+	//	format	not set for remote_status
+	//	max_value	not set for remote_status
+	//	min_value	not set for remote_status
+	//	max_alarm	not set for remote_status
+	//	min_alarm	not set for remote_status
+	//	max_warning	not set for remote_status
+	//	min_warning	not set for remote_status
+	//	delta_t	not set for remote_status
+	//	delta_val	not set for remote_status
+	
+	remote_status->set_default_properties(remote_status_prop);
+	//	Not Polled
+	remote_status->set_disp_level(Tango::OPERATOR);
+	//	Not Memorized
+	att_list.push_back(remote_status);
+
+	//	Attribute : lock_status
+	lock_statusAttrib	*lock_status = new lock_statusAttrib();
+	Tango::UserDefaultAttrProp	lock_status_prop;
+	lock_status_prop.set_description("the lock status   0 : Unlock   1 : Lock");
+	//	label	not set for lock_status
+	//	unit	not set for lock_status
+	//	standard_unit	not set for lock_status
+	//	display_unit	not set for lock_status
+	//	format	not set for lock_status
+	//	max_value	not set for lock_status
+	//	min_value	not set for lock_status
+	//	max_alarm	not set for lock_status
+	//	min_alarm	not set for lock_status
+	//	max_warning	not set for lock_status
+	//	min_warning	not set for lock_status
+	//	delta_t	not set for lock_status
+	//	delta_val	not set for lock_status
+	
+	lock_status->set_default_properties(lock_status_prop);
+	//	Not Polled
+	lock_status->set_disp_level(Tango::OPERATOR);
+	//	Not Memorized
+	att_list.push_back(lock_status);
+
+	//	Attribute : temperature_status
+	temperature_statusAttrib	*temperature_status = new temperature_statusAttrib();
+	Tango::UserDefaultAttrProp	temperature_status_prop;
+	temperature_status_prop.set_description("the temperature status   0 : Normal   1 : Overheat");
+	//	label	not set for temperature_status
+	//	unit	not set for temperature_status
+	//	standard_unit	not set for temperature_status
+	//	display_unit	not set for temperature_status
+	//	format	not set for temperature_status
+	//	max_value	not set for temperature_status
+	//	min_value	not set for temperature_status
+	//	max_alarm	not set for temperature_status
+	//	min_alarm	not set for temperature_status
+	//	max_warning	not set for temperature_status
+	//	min_warning	not set for temperature_status
+	//	delta_t	not set for temperature_status
+	//	delta_val	not set for temperature_status
+	
+	temperature_status->set_default_properties(temperature_status_prop);
+	//	Not Polled
+	temperature_status->set_disp_level(Tango::OPERATOR);
+	//	Not Memorized
+	att_list.push_back(temperature_status);
+
 
 	//	Create a list of static attributes
 	create_static_attribute_list(get_class_attr()->get_attr_list());

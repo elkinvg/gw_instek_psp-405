@@ -112,6 +112,58 @@ public:
 		{return (static_cast<PS_psp_405 *>(dev))->is_curr_level_allowed(ty);}
 };
 
+//	Attribute relay_status class definition
+class relay_statusAttrib: public Tango::Attr
+{
+public:
+	relay_statusAttrib():Attr("relay_status",
+			Tango::DEV_BOOLEAN, Tango::READ) {};
+	~relay_statusAttrib() {};
+	virtual void read(Tango::DeviceImpl *dev,Tango::Attribute &att)
+		{(static_cast<PS_psp_405 *>(dev))->read_relay_status(att);}
+	virtual bool is_allowed(Tango::DeviceImpl *dev,Tango::AttReqType ty)
+		{return (static_cast<PS_psp_405 *>(dev))->is_relay_status_allowed(ty);}
+};
+
+//	Attribute remote_status class definition
+class remote_statusAttrib: public Tango::Attr
+{
+public:
+	remote_statusAttrib():Attr("remote_status",
+			Tango::DEV_BOOLEAN, Tango::READ) {};
+	~remote_statusAttrib() {};
+	virtual void read(Tango::DeviceImpl *dev,Tango::Attribute &att)
+		{(static_cast<PS_psp_405 *>(dev))->read_remote_status(att);}
+	virtual bool is_allowed(Tango::DeviceImpl *dev,Tango::AttReqType ty)
+		{return (static_cast<PS_psp_405 *>(dev))->is_remote_status_allowed(ty);}
+};
+
+//	Attribute lock_status class definition
+class lock_statusAttrib: public Tango::Attr
+{
+public:
+	lock_statusAttrib():Attr("lock_status",
+			Tango::DEV_BOOLEAN, Tango::READ) {};
+	~lock_statusAttrib() {};
+	virtual void read(Tango::DeviceImpl *dev,Tango::Attribute &att)
+		{(static_cast<PS_psp_405 *>(dev))->read_lock_status(att);}
+	virtual bool is_allowed(Tango::DeviceImpl *dev,Tango::AttReqType ty)
+		{return (static_cast<PS_psp_405 *>(dev))->is_lock_status_allowed(ty);}
+};
+
+//	Attribute temperature_status class definition
+class temperature_statusAttrib: public Tango::Attr
+{
+public:
+	temperature_statusAttrib():Attr("temperature_status",
+			Tango::DEV_BOOLEAN, Tango::READ) {};
+	~temperature_statusAttrib() {};
+	virtual void read(Tango::DeviceImpl *dev,Tango::Attribute &att)
+		{(static_cast<PS_psp_405 *>(dev))->read_temperature_status(att);}
+	virtual bool is_allowed(Tango::DeviceImpl *dev,Tango::AttReqType ty)
+		{return (static_cast<PS_psp_405 *>(dev))->is_temperature_status_allowed(ty);}
+};
+
 
 //=========================================
 //	Define classes for commands

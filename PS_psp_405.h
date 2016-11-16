@@ -179,6 +179,10 @@ public:
 	Tango::DevDouble	*attr_curr_meas_read;
 	Tango::DevDouble	*attr_volt_level_read;
 	Tango::DevDouble	*attr_curr_level_read;
+	Tango::DevBoolean	*attr_relay_status_read;
+	Tango::DevBoolean	*attr_remote_status_read;
+	Tango::DevBoolean	*attr_lock_status_read;
+	Tango::DevBoolean	*attr_temperature_status_read;
 
 //	Constructors and destructors
 public:
@@ -276,6 +280,42 @@ public:
  */
 	virtual void read_curr_level(Tango::Attribute &attr);
 	virtual bool is_curr_level_allowed(Tango::AttReqType type);
+/**
+ *	Attribute relay_status related methods
+ *	Description: the relay status   0:OFF   1 : ON
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+	virtual void read_relay_status(Tango::Attribute &attr);
+	virtual bool is_relay_status_allowed(Tango::AttReqType type);
+/**
+ *	Attribute remote_status related methods
+ *	Description: the remote status   0 : Normal   1 : Remote(*)
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+	virtual void read_remote_status(Tango::Attribute &attr);
+	virtual bool is_remote_status_allowed(Tango::AttReqType type);
+/**
+ *	Attribute lock_status related methods
+ *	Description: the lock status   0 : Unlock   1 : Lock
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+	virtual void read_lock_status(Tango::Attribute &attr);
+	virtual bool is_lock_status_allowed(Tango::AttReqType type);
+/**
+ *	Attribute temperature_status related methods
+ *	Description: the temperature status   0 : Normal   1 : Overheat
+ *
+ *	Data type:	Tango::DevBoolean
+ *	Attr type:	Scalar
+ */
+	virtual void read_temperature_status(Tango::Attribute &attr);
+	virtual bool is_temperature_status_allowed(Tango::AttReqType type);
 
 
 	//--------------------------------------------------------

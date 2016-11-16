@@ -120,6 +120,70 @@ bool PS_psp_405::is_curr_level_allowed(TANGO_UNUSED(Tango::AttReqType type))
 	return true;
 }
 
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_relay_status_allowed()
+ *	Description : Execution allowed for relay_status attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_relay_status_allowed(TANGO_UNUSED(Tango::AttReqType type))
+{
+
+	//	Not any excluded states for relay_status attribute in read access.
+	/*----- PROTECTED REGION ID(PS_psp_405::relay_statusStateAllowed_READ) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::relay_statusStateAllowed_READ
+	return true;
+}
+
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_remote_status_allowed()
+ *	Description : Execution allowed for remote_status attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_remote_status_allowed(TANGO_UNUSED(Tango::AttReqType type))
+{
+
+	//	Not any excluded states for remote_status attribute in read access.
+	/*----- PROTECTED REGION ID(PS_psp_405::remote_statusStateAllowed_READ) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::remote_statusStateAllowed_READ
+	return true;
+}
+
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_lock_status_allowed()
+ *	Description : Execution allowed for lock_status attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_lock_status_allowed(TANGO_UNUSED(Tango::AttReqType type))
+{
+
+	//	Not any excluded states for lock_status attribute in read access.
+	/*----- PROTECTED REGION ID(PS_psp_405::lock_statusStateAllowed_READ) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::lock_statusStateAllowed_READ
+	return true;
+}
+
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_temperature_status_allowed()
+ *	Description : Execution allowed for temperature_status attribute
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_temperature_status_allowed(TANGO_UNUSED(Tango::AttReqType type))
+{
+
+	//	Not any excluded states for temperature_status attribute in read access.
+	/*----- PROTECTED REGION ID(PS_psp_405::temperature_statusStateAllowed_READ) ENABLED START -----*/
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::temperature_statusStateAllowed_READ
+	return true;
+}
+
 
 //=================================================
 //		Commands Allowed Methods
