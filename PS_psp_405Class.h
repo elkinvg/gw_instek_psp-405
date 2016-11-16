@@ -112,19 +112,6 @@ public:
 		{return (static_cast<PS_psp_405 *>(dev))->is_curr_level_allowed(ty);}
 };
 
-//	Attribute maximum_volt_limit class definition
-class maximum_volt_limitAttrib: public Tango::Attr
-{
-public:
-	maximum_volt_limitAttrib():Attr("maximum_volt_limit",
-			Tango::DEV_DOUBLE, Tango::READ) {};
-	~maximum_volt_limitAttrib() {};
-	virtual void read(Tango::DeviceImpl *dev,Tango::Attribute &att)
-		{(static_cast<PS_psp_405 *>(dev))->read_maximum_volt_limit(att);}
-	virtual bool is_allowed(Tango::DeviceImpl *dev,Tango::AttReqType ty)
-		{return (static_cast<PS_psp_405 *>(dev))->is_maximum_volt_limit_allowed(ty);}
-};
-
 
 //=========================================
 //	Define classes for commands

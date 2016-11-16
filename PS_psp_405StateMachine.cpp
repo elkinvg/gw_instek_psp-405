@@ -120,22 +120,6 @@ bool PS_psp_405::is_curr_level_allowed(TANGO_UNUSED(Tango::AttReqType type))
 	return true;
 }
 
-//--------------------------------------------------------
-/**
- *	Method      : PS_psp_405::is_maximum_volt_limit_allowed()
- *	Description : Execution allowed for maximum_volt_limit attribute
- */
-//--------------------------------------------------------
-bool PS_psp_405::is_maximum_volt_limit_allowed(TANGO_UNUSED(Tango::AttReqType type))
-{
-
-	//	Not any excluded states for maximum_volt_limit attribute in read access.
-	/*----- PROTECTED REGION ID(PS_psp_405::maximum_volt_limitStateAllowed_READ) ENABLED START -----*/
-	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::maximum_volt_limitStateAllowed_READ
-	return true;
-}
-
 
 //=================================================
 //		Commands Allowed Methods

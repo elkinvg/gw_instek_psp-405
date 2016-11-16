@@ -71,11 +71,10 @@ static const char *RcsId = "$Id:  $";
 //================================================================
 //  Attributes managed are:
 //================================================================
-//  volt_meas           |  Tango::DevDouble	Scalar
-//  curr_meas           |  Tango::DevDouble	Scalar
-//  volt_level          |  Tango::DevDouble	Scalar
-//  curr_level          |  Tango::DevDouble	Scalar
-//  maximum_volt_limit  |  Tango::DevDouble	Scalar
+//  volt_meas   |  Tango::DevDouble	Scalar
+//  curr_meas   |  Tango::DevDouble	Scalar
+//  volt_level  |  Tango::DevDouble	Scalar
+//  curr_level  |  Tango::DevDouble	Scalar
 //================================================================
 
 namespace PS_psp_405_ns
@@ -138,7 +137,6 @@ void PS_psp_405::delete_device()
 	delete[] attr_curr_meas_read;
 	delete[] attr_volt_level_read;
 	delete[] attr_curr_level_read;
-	delete[] attr_maximum_volt_limit_read;
 
 	if (Tango::Util::instance()->is_svr_shutting_down()==false  &&
 		Tango::Util::instance()->is_device_restarting(device_name)==false &&
@@ -178,7 +176,6 @@ void PS_psp_405::init_device()
 	attr_curr_meas_read = new Tango::DevDouble[1];
 	attr_volt_level_read = new Tango::DevDouble[1];
 	attr_curr_level_read = new Tango::DevDouble[1];
-	attr_maximum_volt_limit_read = new Tango::DevDouble[1];
 	/*----- PROTECTED REGION ID(PS_psp_405::init_device) ENABLED START -----*/
 	
     initTangoSocket(socket);
@@ -347,24 +344,6 @@ void PS_psp_405::read_curr_level(Tango::Attribute &attr)
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_curr_level
 }
-//--------------------------------------------------------
-/**
- *	Read attribute maximum_volt_limit related method
- *	Description: 
- *
- *	Data type:	Tango::DevDouble
- *	Attr type:	Scalar
- */
-//--------------------------------------------------------
-void PS_psp_405::read_maximum_volt_limit(Tango::Attribute &attr)
-{
-	DEBUG_STREAM << "PS_psp_405::read_maximum_volt_limit(Tango::Attribute &attr) entering... " << endl;
-	/*----- PROTECTED REGION ID(PS_psp_405::read_maximum_volt_limit) ENABLED START -----*/
-	//	Set the attribute value
-    attr.set_value(attr_maximum_volt_limit_read);
-	
-	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_maximum_volt_limit
-}
 
 //--------------------------------------------------------
 /**
@@ -458,6 +437,9 @@ void PS_psp_405::set_voltage_level(Tango::DevDouble argin)
         ERROR_STREAM << "Setting voltage level " << argin << " more than minimum value  or less than maximum value" << endl;
         return;
     }
+    string command_to_ps = formatInput(SETOUTVOLTVALUE,argin,5,2);
+    toSocketWrite(command_to_ps);
+
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_voltage_level
 }
@@ -478,6 +460,8 @@ void PS_psp_405::set_current_level(Tango::DevDouble argin)
         ERROR_STREAM << "Setting current level " << argin << " more than minimum value  or less than maximum value" << endl;
         return;
     }
+    string command_to_ps = formatInput(SETCURRLIMIT,argin,4,2);
+    toSocketWrite(command_to_ps);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_current_level
 }
@@ -498,6 +482,8 @@ void PS_psp_405::set_maximum_voltage_limit(Tango::DevDouble argin)
         ERROR_STREAM << "Setting voltage limit " << argin << " more than minimum value  or less than maximum value" << endl;
         return;
     }
+    string command_to_ps = formatInput(SETVOLTLIMIT,argin,2,0);
+    toSocketWrite(command_to_ps);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_maximum_voltage_limit
 }
@@ -619,6 +605,23 @@ string PS_psp_405::formatInput(string preposition, double dataIn, unsigned short
     return ss.str();
 }
 
+
+// //--------------------------------------------------------
+// /**
+//  *	Read attribute maximum_volt_limit related method
+//  *	Description: 
+//  *
+//  *	Data type:	Tango::DevDouble
+//  *	Attr type:	Scalar
+//  */
+// //--------------------------------------------------------
+// void PS_psp_405::read_maximum_volt_limit(Tango::Attribute &attr)
+// {
+// 	DEBUG_STREAM << "PS_psp_405::read_maximum_volt_limit(Tango::Attribute &attr) entering... " << endl;
+// 	//	Set the attribute value
+//     attr.set_value(attr_maximum_volt_limit_read);
+// 	
+// }
 
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::namespace_ending

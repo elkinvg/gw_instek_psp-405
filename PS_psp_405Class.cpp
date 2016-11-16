@@ -677,30 +677,6 @@ void PS_psp_405Class::attribute_factory(vector<Tango::Attr *> &att_list)
 		att_list.push_back(curr_level);
 	}
 
-	//	Attribute : maximum_volt_limit
-	maximum_volt_limitAttrib	*maximum_volt_limit = new maximum_volt_limitAttrib();
-	Tango::UserDefaultAttrProp	maximum_volt_limit_prop;
-	//	description	not set for maximum_volt_limit
-	//	label	not set for maximum_volt_limit
-	//	unit	not set for maximum_volt_limit
-	//	standard_unit	not set for maximum_volt_limit
-	//	display_unit	not set for maximum_volt_limit
-	//	format	not set for maximum_volt_limit
-	//	max_value	not set for maximum_volt_limit
-	//	min_value	not set for maximum_volt_limit
-	//	max_alarm	not set for maximum_volt_limit
-	//	min_alarm	not set for maximum_volt_limit
-	//	max_warning	not set for maximum_volt_limit
-	//	min_warning	not set for maximum_volt_limit
-	//	delta_t	not set for maximum_volt_limit
-	//	delta_val	not set for maximum_volt_limit
-	
-	maximum_volt_limit->set_default_properties(maximum_volt_limit_prop);
-	//	Not Polled
-	maximum_volt_limit->set_disp_level(Tango::OPERATOR);
-	//	Not Memorized
-	att_list.push_back(maximum_volt_limit);
-
 
 	//	Create a list of static attributes
 	create_static_attribute_list(get_class_attr()->get_attr_list());
