@@ -131,7 +131,7 @@ bool PS_psp_405::is_relay_status_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
 	//	Not any excluded states for relay_status attribute in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::relay_statusStateAllowed_READ) ENABLED START -----*/
-	
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::relay_statusStateAllowed_READ
 	return true;
 }
@@ -147,7 +147,7 @@ bool PS_psp_405::is_remote_status_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
 	//	Not any excluded states for remote_status attribute in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::remote_statusStateAllowed_READ) ENABLED START -----*/
-	
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::remote_statusStateAllowed_READ
 	return true;
 }
@@ -163,7 +163,7 @@ bool PS_psp_405::is_lock_status_allowed(TANGO_UNUSED(Tango::AttReqType type))
 
 	//	Not any excluded states for lock_status attribute in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::lock_statusStateAllowed_READ) ENABLED START -----*/
-	
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::lock_statusStateAllowed_READ
 	return true;
 }
@@ -179,11 +179,28 @@ bool PS_psp_405::is_temperature_status_allowed(TANGO_UNUSED(Tango::AttReqType ty
 
 	//	Not any excluded states for temperature_status attribute in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::temperature_statusStateAllowed_READ) ENABLED START -----*/
-	
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::temperature_statusStateAllowed_READ
 	return true;
 }
 
+//=================================================
+//		pipe Allowed Methods
+//=================================================
+//--------------------------------------------------------
+/**
+ *	Method      : PS_psp_405::is_PipeAttrs_allowed()
+ *	Description : Execution allowed for PipeAttrs pipe
+ */
+//--------------------------------------------------------
+bool PS_psp_405::is_PipeAttrs_allowed(TANGO_UNUSED(Tango::PipeReqType type))
+{
+	//	Not any excluded states for PipeAttrs pipe in read access.
+	/*----- PROTECTED REGION ID(PS_psp_405::PipeAttrsStateAllowed_READ) ENABLED START -----*/
+    return checkSocketState();
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::PipeAttrsStateAllowed_READ
+	return true;
+}
 
 //=================================================
 //		Commands Allowed Methods
@@ -200,6 +217,9 @@ bool PS_psp_405::is_On_allowed(TANGO_UNUSED(const CORBA::Any &any))
 	//	Not any excluded states for On command.
 	/*----- PROTECTED REGION ID(PS_psp_405::OnStateAllowed) ENABLED START -----*/
 
+    if(this->get_state() == Tango::ON)
+        return false;
+
     return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::OnStateAllowed
 	return true;
@@ -215,6 +235,8 @@ bool PS_psp_405::is_Off_allowed(TANGO_UNUSED(const CORBA::Any &any))
 {
 	//	Not any excluded states for Off command.
 	/*----- PROTECTED REGION ID(PS_psp_405::OffStateAllowed) ENABLED START -----*/
+    if(this->get_state() == Tango::OFF)
+        return false;
 
     return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::OffStateAllowed
@@ -231,6 +253,9 @@ bool PS_psp_405::is_UpdateAllTheStatusValues_allowed(TANGO_UNUSED(const CORBA::A
 {
 	//	Not any excluded states for UpdateAllTheStatusValues command.
 	/*----- PROTECTED REGION ID(PS_psp_405::UpdateAllTheStatusValuesStateAllowed) ENABLED START -----*/
+
+    unix_timestamp = std::chrono::seconds(std::time(NULL));
+    tv = unix_timestamp.count();
 
     return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::UpdateAllTheStatusValuesStateAllowed
@@ -279,7 +304,7 @@ bool PS_psp_405::is_SetMaximumVoltageLimit_allowed(TANGO_UNUSED(const CORBA::Any
 {
 	//	Not any excluded states for SetMaximumVoltageLimit command.
 	/*----- PROTECTED REGION ID(PS_psp_405::SetMaximumVoltageLimitStateAllowed) ENABLED START -----*/
-	
+    return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::SetMaximumVoltageLimitStateAllowed
 	return true;
 }

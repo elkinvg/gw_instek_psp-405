@@ -452,6 +452,50 @@ void PS_psp_405::add_dynamic_attributes()
 
 //--------------------------------------------------------
 /**
+ *	Read pipe PipeAttrs related method
+ *	Description: name_of_device - The name of device
+ *               volt_meas - the output voltage
+ *               curr_meas - the output current
+ *               volt_level - the voltage level in volts
+ *               curr_level - the current level in amps
+ *               State - State of device
+ *               Status - Status of device
+ *               timestamp - UNIX timestamp
+ */
+//--------------------------------------------------------
+void PS_psp_405::read_PipeAttrs(Tango::Pipe &pipe)
+{
+	DEBUG_STREAM << "PS_psp_405::read_PipeAttrs(Tango::Pipe &pipe) entering... " << endl;
+	/*----- PROTECTED REGION ID(PS_psp_405::read_PipeAttrs) ENABLED START -----*/
+	
+    pipe.set_root_blob_name("dataFromPs");
+    vector<string> names{
+        "name_of_device",
+        "volt_measure",
+        "current_measure",
+        "volt_level",
+        "curr_level",
+        "State",
+        "Status",
+        "timestamp"
+    };
+
+    pipe.set_data_elt_names(names);
+
+    try {
+        pipe << get_name() << attr_volt_meas_read[0] << attr_curr_meas_read[0] << attr_volt_level_read[0] << attr_curr_level_read[0] << get_state() << get_status() << tv;
+    }
+    catch (Tango::WrongData &e) {
+        ERROR_STREAM << " wrong data in pipe pswData " << endl;
+    }
+    catch (Tango::DevFailed &e) {
+        fromException(e,false);
+    }
+	
+	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::read_PipeAttrs
+}
+//--------------------------------------------------------
+/**
  *	Command On related method
  *	Description: 
  *

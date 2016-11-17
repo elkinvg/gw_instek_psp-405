@@ -166,6 +166,25 @@ public:
 
 
 //=========================================
+//	Define classes for pipes
+//=========================================
+//	Pipe PipeAttrs class definition
+class PipeAttrsClass: public Tango::Pipe
+{
+public:
+	PipeAttrsClass(const string &name, Tango::DispLevel level)
+		:Pipe(name, level) {};
+
+	~PipeAttrsClass() {};
+
+	virtual bool is_allowed (Tango::DeviceImpl *dev,Tango::PipeReqType _prt)
+		{return (static_cast<PS_psp_405 *>(dev))->is_PipeAttrs_allowed(_prt);}
+	virtual void read(Tango::DeviceImpl *dev)
+		{(static_cast<PS_psp_405 *>(dev))->read_PipeAttrs(*this);}
+};
+
+
+//=========================================
 //	Define classes for commands
 //=========================================
 //	Command On class definition

@@ -796,6 +796,13 @@ void PS_psp_405Class::pipe_factory()
 	//	Add your own code
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405Class::pipe_factory_before
+	Tango::UserDefaultPipeProp udpp;
+	PipeAttrsClass	*pPipeAttrs = new PipeAttrsClass("PipeAttrs",Tango::OPERATOR);
+	udpp.set_description("name_of_device - The name of device\nvolt_meas - the output voltage\ncurr_meas - the output current\nvolt_level - the voltage level in volts\ncurr_level - the current level in amps\nState - State of device\nStatus - Status of device\ntimestamp - UNIX timestamp");
+	udpp.set_label("Attributes for PS psp-405");
+	pPipeAttrs->set_default_properties(udpp);
+	pipe_list.push_back(pPipeAttrs);
+
 	/*----- PROTECTED REGION ID(PS_psp_405Class::pipe_factory_after) ENABLED START -----*/
 	
 	//	Add your own code

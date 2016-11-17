@@ -42,6 +42,7 @@
 #include <PowerSuppliesAbst.h>
 
 #include <array>
+#include <chrono>
 
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405.h
@@ -160,6 +161,9 @@ private:
     */
     string SETCURRLIMIT = "SI ";
 
+
+    std::chrono::seconds unix_timestamp; // TIMESTAMP from std::chrono
+    Tango::DevULong tv; // TIMESTAMP
 
     const double errorOut = -1.0;
     const unsigned int sleepTm = 200;
@@ -328,6 +332,11 @@ public:
 
 
 
+//	pipe related methods
+public:
+	//	Pipe PipeAttrs
+	bool is_PipeAttrs_allowed(Tango::PipeReqType);
+	void read_PipeAttrs(Tango::Pipe &);
 
 //	Command related methods
 public:
