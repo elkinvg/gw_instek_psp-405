@@ -191,6 +191,10 @@ void PS_psp_405::init_device()
 	/*----- PROTECTED REGION ID(PS_psp_405::init_device) ENABLED START -----*/
 	
     initTangoSocket(socket);
+    if (!isSocketOn) {
+        set_state(Tango::FAULT);
+        set_status("Socket state if OFF or FAULT");
+    }
     attr_curr_level_read[0] = -1;
     attr_volt_level_read[0] = -1;
     attr_curr_meas_read[0] = -1;
