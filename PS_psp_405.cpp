@@ -479,15 +479,22 @@ void PS_psp_405::read_PipeAttrs(Tango::Pipe &pipe)
         "current_measure",
         "volt_level",
         "curr_level",
+        "ps_statuses",
         "State",
         "Status",
         "timestamp"
     };
 
     pipe.set_data_elt_names(names);
+    unsigned short int statuses = 0;
+
+    statuses = statuses | (attr_lock_status_read[0]);
+    statuses = statuses | (attr_relay_status_read[0] << 1);
+    statuses = statuses | (attr_remote_status_read[0] << 2);
+    statuses = statuses | (attr_temperature_status_read[0] << 3);
 
     try {
-        pipe << get_name() << attr_volt_meas_read[0] << attr_curr_meas_read[0] << attr_volt_level_read[0] << attr_curr_level_read[0] << get_state() << get_status() << tv;
+        pipe << get_name() << attr_volt_meas_read[0] << attr_curr_meas_read[0] << attr_volt_level_read[0] << attr_curr_level_read[0] << statuses << get_state() << get_status() << tv;
     }
     catch (Tango::WrongData &e) {
         ERROR_STREAM << " wrong data in pipe pswData " << endl;
