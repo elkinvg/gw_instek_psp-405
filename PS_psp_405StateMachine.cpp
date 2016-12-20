@@ -197,7 +197,7 @@ bool PS_psp_405::is_PipeAttrs_allowed(TANGO_UNUSED(Tango::PipeReqType type))
 {
 	//	Not any excluded states for PipeAttrs pipe in read access.
 	/*----- PROTECTED REGION ID(PS_psp_405::PipeAttrsStateAllowed_READ) ENABLED START -----*/
-    return checkSocketState();
+    //return checkSocketState();
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::PipeAttrsStateAllowed_READ
 	return true;
 }

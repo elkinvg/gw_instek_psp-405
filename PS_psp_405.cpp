@@ -269,7 +269,7 @@ void PS_psp_405::get_device_property()
 //--------------------------------------------------------
 void PS_psp_405::always_executed_hook()
 {
-	DEBUG_STREAM << "PS_psp_405::always_executed_hook()  " << device_name << endl;
+    //DEBUG_STREAM << "PS_psp_405::always_executed_hook()  " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::always_executed_hook) ENABLED START -----*/
 	
     //	code always executed before all requests
@@ -517,7 +517,7 @@ void PS_psp_405::on()
 	DEBUG_STREAM << "PS_psp_405::On()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::on) ENABLED START -----*/
 	
-    toSocketWrite(SETRELAYSTATUSTOON);
+    toSocketWrite(SETRELAYSTATUSTOON,true);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::on
 }
@@ -533,7 +533,7 @@ void PS_psp_405::off()
 	DEBUG_STREAM << "PS_psp_405::Off()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::off) ENABLED START -----*/
 	
-    toSocketWrite(SETRELAYSTATUSTOOFF);
+    toSocketWrite(SETRELAYSTATUSTOOFF,true);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::off
 }
@@ -549,7 +549,7 @@ void PS_psp_405::update_all_the_status_values()
 	DEBUG_STREAM << "PS_psp_405::UpdateAllTheStatusValues()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::update_all_the_status_values) ENABLED START -----*/
 	
-    string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm);
+    string reply = toSocketWriteAndRead(GETALLTHESTATUSVALUE,sleepTm,true);
     //string reply = toSocketWriteAndReadBinary(GETALLTHESTATUSVALUE,sleepTm);
     std::pair<std::array<double, 6>, std::bitset<7>> parsed = parsingOfAllStatusValues(reply);
     std::array<double, 6> outVals = parsed.first;
@@ -584,7 +584,7 @@ void PS_psp_405::set_voltage_level(Tango::DevDouble argin)
         return;
     }
     string command_to_ps = formatInput(SETOUTVOLTVALUE,argin,5,2);
-    toSocketWrite(command_to_ps);
+    toSocketWrite(command_to_ps,true);
 
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_voltage_level
@@ -607,7 +607,7 @@ void PS_psp_405::set_current_level(Tango::DevDouble argin)
         return;
     }
     string command_to_ps = formatInput(SETCURRLIMIT,argin,4,2);
-    toSocketWrite(command_to_ps);
+    toSocketWrite(command_to_ps,true);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_current_level
 }
@@ -629,7 +629,7 @@ void PS_psp_405::set_maximum_voltage_limit(Tango::DevDouble argin)
         return;
     }
     string command_to_ps = formatInput(SETVOLTLIMIT,argin,2,0);
-    toSocketWrite(command_to_ps);
+    toSocketWrite(command_to_ps,true);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_maximum_voltage_limit
 }

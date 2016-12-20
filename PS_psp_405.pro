@@ -13,5 +13,7 @@ INCLUDEPATH += /usr/local/include/tango \
 
             
 SOURCES += main.cpp \
+./PowerSuppliesAbst/*.cpp \
+./PowerSuppliesAbst/*.h \
 *.cpp \
 *.h \
