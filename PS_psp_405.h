@@ -166,7 +166,7 @@ private:
     Tango::DevULong tv; // TIMESTAMP
 
     const double errorOut = -1.0;
-    const unsigned int sleepTm = 500;
+    const unsigned int sleepTm = 200;
     const double maxVolt = 40.0;
     const double maxCurr = 5.0;
 
