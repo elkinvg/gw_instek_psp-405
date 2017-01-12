@@ -36,6 +36,7 @@ static const char *RcsId = "$Id:  $";
 //=============================================================================
 
 #include <PS_psp_405.h>
+#include <ctime>
 
 /*----- PROTECTED REGION END -----*/	//	PS_psp_405::PS_psp_405StateMachine.cpp
 
