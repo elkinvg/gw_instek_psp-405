@@ -517,7 +517,7 @@ void PS_psp_405::on()
 	DEBUG_STREAM << "PS_psp_405::On()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::on) ENABLED START -----*/
 	
-    toSocketWrite(SETRELAYSTATUSTOON,true);
+    toSocketWrite(SETRELAYSTATUSTOON,true, sleepTm);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::on
 }
@@ -533,7 +533,7 @@ void PS_psp_405::off()
 	DEBUG_STREAM << "PS_psp_405::Off()  - " << device_name << endl;
 	/*----- PROTECTED REGION ID(PS_psp_405::off) ENABLED START -----*/
 	
-    toSocketWrite(SETRELAYSTATUSTOOFF,true);
+    toSocketWrite(SETRELAYSTATUSTOOFF,true, sleepTm);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::off
 }
@@ -585,7 +585,7 @@ void PS_psp_405::set_voltage_level(Tango::DevDouble argin)
         return;
     }
     string command_to_ps = formatInput(SETOUTVOLTVALUE,argin,5,2);
-    toSocketWrite(command_to_ps,true);
+    toSocketWrite(command_to_ps,true, sleepTm);
 
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_voltage_level
@@ -608,7 +608,7 @@ void PS_psp_405::set_current_level(Tango::DevDouble argin)
         return;
     }
     string command_to_ps = formatInput(SETCURRLIMIT,argin,4,2);
-    toSocketWrite(command_to_ps,true);
+    toSocketWrite(command_to_ps,true, sleepTm);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_current_level
 }
@@ -630,7 +630,7 @@ void PS_psp_405::set_maximum_voltage_limit(Tango::DevDouble argin)
         return;
     }
     string command_to_ps = formatInput(SETVOLTLIMIT,argin,2,0);
-    toSocketWrite(command_to_ps,true);
+    toSocketWrite(command_to_ps,true, sleepTm);
 	
 	/*----- PROTECTED REGION END -----*/	//	PS_psp_405::set_maximum_voltage_limit
 }
